@@ -4,6 +4,7 @@ import { Game, START_FEN } from "./lib/game.js";
 import { Engine } from "./lib/engine.js";
 import * as P from "./lib/position.js";
 import { exportPgn, importText } from "./lib/pgn.js";
+import { initScan } from "./scan.js";
 import { whiteScore, formatScore } from "./lib/uci.js";
 
 const $ = (id) => document.getElementById(id);
@@ -324,14 +325,14 @@ async function renderEdit() {
   if (seq === editSeq && editing) await board.setOrientation(iPlay === "w" ? COLOR.white : COLOR.black);
 }
 
-function enterEdit() {
+function enterEdit(startPos = null, startIPlay = null) {
   engine.stop();
   board.disableMoveInput();
   board.removeMarkers();
   drawArrows([], false);
   $("promo").hidden = true;
-  edit = P.parseFen(game.fen).position;
-  iPlay = game.orientation;
+  edit = startPos || P.parseFen(game.fen).position;
+  iPlay = startIPlay || game.orientation;
   editing = true;
   for (const id of ["play-row", "hints", "fen-form", "moves"]) $(id).hidden = true;
   $("editor").hidden = false;
@@ -349,7 +350,7 @@ function leaveEdit() {
 
 function setEdit(next) { edit = next; renderEdit(); }
 
-$("edit").addEventListener("click", enterEdit);
+$("edit").addEventListener("click", () => enterEdit());
 $("ed-cancel").addEventListener("click", () => { leaveEdit(); render(false); });
 $("ed-clear").addEventListener("click", () => setEdit(P.emptyPosition()));
 $("ed-start").addEventListener("click", () => setEdit(P.startPosition()));
@@ -373,6 +374,27 @@ $("ed-play").addEventListener("click", () => {
   render(false);
 });
 window.__picchess.editor = { get edit() { return edit; }, get editing() { return editing; } };
+
+// ---- Scan image (ticket 05): input + grid finding; recognition comes later ----
+const SCAN_HIDE = ["play-row", "hints", "fen-form", "moves", "board-wrap", "banner"];
+const scan = initScan({
+  onOpen: () => { engine.stop(); for (const id of SCAN_HIDE) $(id).hidden = true; },
+  onClose: () => { for (const id of SCAN_HIDE) $(id).hidden = false; },
+  onUseGrid: ({ bottom, turn }) => {
+    // placeholder until the square classifier exists: empty board, answers carried over
+    enterEdit(P.setTurn(P.emptyPosition(), turn), bottom);
+  },
+});
+window.__picchess.scan = scan;
+const scanUrl = new URLSearchParams(location.search).get("scan");
+if (scanUrl && !/^[a-z]+:|^\/\//i.test(scanUrl)) { // same-origin relative paths only
+  const q = new URLSearchParams(location.search);
+  for (const [name, v] of [["scan-bottom", q.get("bottom")], ["scan-turn", q.get("turn")]]) {
+    const r = v && document.querySelector(`input[name=${name}][value=${v}]`);
+    if (r) r.checked = true;
+  }
+  scan.loadUrl(scanUrl);
+}
 
 await loadPieceSprite();
 buildPalette();

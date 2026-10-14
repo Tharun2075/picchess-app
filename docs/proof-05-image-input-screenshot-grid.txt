@@ -1,0 +1,3 @@
+scan state: {"msg":"Board found (100% sure). Check the grid; drag a corner dot if it is off.","corners":[[10.481012658227849,270.75949367088606],[404.7003218193521,270.75949367088606],[404.7003218193521,664.9788028320104],[10.481012658227849,664.9788028320104]],"tiles":64,"w":414,"h":896,"found":{"x":10.481012658227849,"y":270.75949367088606,"size":394.2193091611243,"confidence":1,"agree":1,"edge":25.14164854180915}}
+true box for sample (truth.json 005): x=11 y=272 size=392
+after Use this grid: {"editing":true,"banner":"Editing: Black to move, you play Black."}

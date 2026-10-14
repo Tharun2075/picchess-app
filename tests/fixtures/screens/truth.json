@@ -1,0 +1,2202 @@
+{
+ "000.png": {
+  "box": [
+   128,
+   23,
+   344
+  ],
+  "fen": "2n2N2/nr2K1Q1/P1nppNR1/1P1QP3/r2k1ppP/P1r3R1/4P1bp/Q1n3NN",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "001.png": {
+  "box": [
+   20,
+   20,
+   560
+  ],
+  "fen": "8/8/6q1/4P1K1/4k3/8/5n2/4r1RB",
+  "theme": "green",
+  "flipped": false,
+  "kind": "square"
+ },
+ "002.png": {
+  "box": [
+   120,
+   13,
+   360
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "003.png": {
+  "box": [
+   16,
+   246,
+   328
+  ],
+  "fen": "1b1N2KQ/1P2k2p/8/8/nr4p1/8/8/2n3nN",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "004.png": {
+  "box": [
+   132,
+   80,
+   336
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "005.png": {
+  "box": [
+   11,
+   272,
+   392
+  ],
+  "fen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "006.png": {
+  "box": [
+   11,
+   215,
+   368
+  ],
+  "fen": "3bnB2/1Pqr2KQ/1R2p3/2ppb2b/p3n3/2R1R1P1/1Rq3R1/1kNN1N2",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "007.png": {
+  "box": [
+   4,
+   4,
+   592
+  ],
+  "fen": "8/3k2Kb/8/6B1/8/1n6/8/4r3",
+  "theme": "green",
+  "flipped": true,
+  "kind": "square"
+ },
+ "008.png": {
+  "box": [
+   16,
+   16,
+   608
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": false,
+  "kind": "square"
+ },
+ "009.png": {
+  "box": [
+   3,
+   211,
+   408
+  ],
+  "fen": "8/4P3/3p4/8/8/2pk4/N7/2K3N1",
+  "theme": "green",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "010.png": {
+  "box": [
+   19,
+   230,
+   352
+  ],
+  "fen": "6N1/8/8/2r3qK/5k2/8/8/8",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "011.png": {
+  "box": [
+   297,
+   56,
+   488
+  ],
+  "fen": "3N2n1/1QKBq3/5R1B/2P2p2/p4Q2/1k2r2p/p1pPB3/b2Rn3",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "012.png": {
+  "box": [
+   12,
+   212,
+   336
+  ],
+  "fen": "2b5/3P4/8/1KN2P2/3p4/4k1p1/2P1p1b1/5N2",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "013.png": {
+  "box": [
+   108,
+   19,
+   384
+  ],
+  "fen": "2nNQ2K/Pkp2P1n/P4P1b/3brp2/1R2p3/1q4Pp/4b1B1/1N2n1N1",
+  "theme": "green",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "014.png": {
+  "box": [
+   4,
+   254,
+   352
+  ],
+  "fen": "rN1n3r/1B2Q3/p3BKnB/BP2Pp2/k2R1p2/2N1p3/7n/2n1N2N",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "015.png": {
+  "box": [
+   64,
+   64,
+   512
+  ],
+  "fen": "2Rb2N1/1rb3B1/Rp1k4/2PpP3/Nb1QRr1Q/p1Q1PQ2/1RPBpR2/K2r1Nr1",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "square"
+ },
+ "016.png": {
+  "box": [
+   16,
+   235,
+   328
+  ],
+  "fen": "2Nn1rbB/3b2PB/K5P1/4qP1p/PPpPkBNR/P1RP1p2/8/b1nn1B2",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "017.png": {
+  "box": [
+   116,
+   60,
+   408
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "018.png": {
+  "box": [
+   23,
+   229,
+   368
+  ],
+  "fen": "5B2/pp2n3/K3RkN1/1P4Nr/8/p7/1P1pn3/n7",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "019.png": {
+  "box": [
+   342,
+   72,
+   456
+  ],
+  "fen": "1N1Q4/PbPn1P2/2N3pb/N1bk2K1/P2r2q1/B7/2qp4/2N3b1",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "020.png": {
+  "box": [
+   144,
+   73,
+   312
+  ],
+  "fen": "8/pNp1B2B/1P2K1q1/3r1bPP/N2N2b1/1R6/8/3k4",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "021.png": {
+  "box": [
+   32,
+   21,
+   496
+  ],
+  "fen": "nnNnq2K/1P3R2/1N3n1Q/p1pQ3r/1nrpP2p/1bpp4/1q4kN/6Nb",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "022.png": {
+  "box": [
+   415,
+   56,
+   528
+  ],
+  "fen": "7N/P1Q5/2K1N1R1/5b2/6P1/6k1/8/4B3",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "023.png": {
+  "box": [
+   418,
+   84,
+   432
+  ],
+  "fen": "b2Bn2N/r2n1P1Q/2P2P2/kR4rn/K1q1bR2/bN3brr/6pn/N1q1N2n",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "024.png": {
+  "box": [
+   100,
+   17,
+   440
+  ],
+  "fen": "qr1q3B/N2pk1P1/R3BnPB/1p3n2/2nn2P1/4q1Kr/3rbpB1/1R1NQnNN",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "025.png": {
+  "box": [
+   222,
+   62,
+   576
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "026.png": {
+  "box": [
+   415,
+   84,
+   472
+  ],
+  "fen": "2b1n3/2N4p/2k5/3R2P1/3RQrR1/1P1K1P1P/1r1P1B2/3N4",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "027.png": {
+  "box": [
+   7,
+   269,
+   376
+  ],
+  "fen": "1N6/K7/4P3/8/6P1/P7/8/2k5",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "028.png": {
+  "box": [
+   64,
+   64,
+   512
+  ],
+  "fen": "1r5n/4PP2/2p5/2r4P/7K/6R1/6Bk/3r4",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "square"
+ },
+ "029.png": {
+  "box": [
+   12,
+   235,
+   336
+  ],
+  "fen": "bQn2KR1/rk2Pb2/PP1NPp2/1b6/2Rr1pn1/1N2p3/2P3N1/1r3NN1",
+  "theme": "green",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "030.png": {
+  "box": [
+   128,
+   68,
+   384
+  ],
+  "fen": "1n2Rq2/8/5B1P/3k4/6P1/5Br1/7b/B2n2K1",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "031.png": {
+  "box": [
+   28,
+   28,
+   544
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "square"
+ },
+ "032.png": {
+  "box": [
+   28,
+   28,
+   584
+  ],
+  "fen": "Nq4q1/4n3/1P1PBR1K/1np5/8/8/2p1P3/1k3Q2",
+  "theme": "green",
+  "flipped": false,
+  "kind": "square"
+ },
+ "033.png": {
+  "box": [
+   32,
+   32,
+   576
+  ],
+  "fen": "nn1n3N/R2r1P2/N1P4P/3Nn1P1/1nPBPn1p/4Prn1/6k1/N5Kn",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "square"
+ },
+ "034.png": {
+  "box": [
+   7,
+   262,
+   400
+  ],
+  "fen": "Nn3k2/1PBR3p/1p1K4/1R1npq2/2n5/1r1prp2/3qBP1N/1n5Q",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "035.png": {
+  "box": [
+   7,
+   234,
+   376
+  ],
+  "fen": "BQ1N4/2Qb1rp1/R1nn4/1N3p2/1n2PPr1/R4b2/B1p3n1/nKk1Q3",
+  "theme": "green",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "036.png": {
+  "box": [
+   35,
+   50,
+   600
+  ],
+  "fen": "2rRb3/8/2pK3N/7P/8/4r2k/1P5p/1r6",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "037.png": {
+  "box": [
+   132,
+   75,
+   376
+  ],
+  "fen": "Nn4N1/1NPP2Pb/1qK1P1B1/1RP1p1k1/1pp5/6RN/b3Ppn1/1r2nnNN",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "038.png": {
+  "box": [
+   12,
+   242,
+   336
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "039.png": {
+  "box": [
+   12,
+   12,
+   576
+  ],
+  "fen": "8/8/8/8/p6r/8/qPk2K2/8",
+  "theme": "green",
+  "flipped": true,
+  "kind": "square"
+ },
+ "040.png": {
+  "box": [
+   16,
+   204,
+   328
+  ],
+  "fen": "N2N2NB/8/7P/6P1/B7/1P1p2Pq/8/3nk1K1",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "041.png": {
+  "box": [
+   15,
+   246,
+   360
+  ],
+  "fen": "N6n/8/8/b4P2/8/5p2/5K2/6nk",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "042.png": {
+  "box": [
+   4,
+   233,
+   352
+  ],
+  "fen": "n3KrRn/2p1Qb2/p1n2ppB/Ppq3q1/3NP1R1/npn5/7P/2Nk4",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "043.png": {
+  "box": [
+   28,
+   28,
+   584
+  ],
+  "fen": "8/6N1/n3b2P/5N2/1q5r/P1k2N2/7p/B3nKb1",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "square"
+ },
+ "044.png": {
+  "box": [
+   347,
+   58,
+   584
+  ],
+  "fen": "5nNb/1pqp3p/K4P2/2n1r3/7P/1nQQ2bb/2k3bp/5R2",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "045.png": {
+  "box": [
+   120,
+   0,
+   360
+  ],
+  "fen": "n7/k7/8/2n5/3bK1P1/8/1B6/8",
+  "theme": "green",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "046.png": {
+  "box": [
+   35,
+   92,
+   416
+  ],
+  "fen": "4N2n/7k/8/7P/7q/B2p4/n7/5K1N",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "047.png": {
+  "box": [
+   4,
+   4,
+   632
+  ],
+  "fen": "b4nNN/4b1P1/4bRNp/1q2K1p1/Rp2R2p/b1bpp2b/2qpb3/3NnbBk",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "square"
+ },
+ "048.png": {
+  "box": [
+   11,
+   213,
+   368
+  ],
+  "fen": "1Q4N1/8/1k4n1/8/P4B2/B5p1/7Q/K6B",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "049.png": {
+  "box": [
+   157,
+   90,
+   520
+  ],
+  "fen": "3NN3/N4K2/pk4pn/2b2P2/B1P5/7P/2np2p1/2b3n1",
+  "theme": "green",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "050.png": {
+  "box": [
+   11,
+   206,
+   368
+  ],
+  "fen": "4N1r1/1Q1n4/p2n4/3k1b2/8/2Q5/3BN3/4K3",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "051.png": {
+  "box": [
+   378,
+   52,
+   496
+  ],
+  "fen": "4bN2/8/n7/k7/8/8/n4K2/8",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "052.png": {
+  "box": [
+   15,
+   261,
+   360
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "053.png": {
+  "box": [
+   57,
+   48,
+   504
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "054.png": {
+  "box": [
+   15,
+   257,
+   360
+  ],
+  "fen": "R1B1n2N/n2P1PR1/1BN5/Bp1npr2/1nbPk3/K1bp2P1/n2pP3/1R4Br",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "055.png": {
+  "box": [
+   8,
+   255,
+   344
+  ],
+  "fen": "1N1r2n1/Q3n1P1/1PP1BPB1/PNn1q1pq/QP1PP1P1/5R2/2n1P2K/N3k1BN",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "056.png": {
+  "box": [
+   3,
+   269,
+   384
+  ],
+  "fen": "1NN4Q/8/Qp1B4/2Kb1p2/1k6/8/8/2N3n1",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "057.png": {
+  "box": [
+   10,
+   10,
+   480
+  ],
+  "fen": "2n1N1B1/1nP3BR/1NPBBN2/4qr1p/n1KBPp1k/4B2b/5b2/n1nN4",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "square"
+ },
+ "058.png": {
+  "box": [
+   359,
+   72,
+   456
+  ],
+  "fen": "1n3QRN/1N1k1N2/6np/PBpb1P2/1p1P1bpK/2PR2PQ/1P2Nrn1/6Q1",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "059.png": {
+  "box": [
+   7,
+   272,
+   376
+  ],
+  "fen": "n1Nnb3/1P2Rnpq/KP1qPp1p/pN5p/R1rR2R1/P5n1/1RN1kbR1/3N3B",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "060.png": {
+  "box": [
+   42,
+   42,
+   416
+  ],
+  "fen": "2n5/3Q2K1/2k1r3/2n1Q3/3r4/8/P7/Bn1r2b1",
+  "theme": "green",
+  "flipped": false,
+  "kind": "square"
+ },
+ "061.png": {
+  "box": [
+   175,
+   78,
+   544
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "062.png": {
+  "box": [
+   12,
+   191,
+   336
+  ],
+  "fen": "6k1/3Nr3/2q4Q/Kn3bR1/2Rn4/B2b4/4R3/8",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "063.png": {
+  "box": [
+   489,
+   86,
+   528
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "064.png": {
+  "box": [
+   48,
+   48,
+   504
+  ],
+  "fen": "8/2B3p1/8/1k1r4/4R3/8/8/4R2K",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "square"
+ },
+ "065.png": {
+  "box": [
+   32,
+   32,
+   536
+  ],
+  "fen": "nBNr1n1N/3N2Pp/1Pq3Qn/pPKp4/pqb1bp1P/PNk2R2/1B2p1bP/3n4",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "square"
+ },
+ "066.png": {
+  "box": [
+   399,
+   92,
+   416
+  ],
+  "fen": "qknnN1q1/3p2B1/qpPr2pp/N1K3NP/P4rb1/N1RNR1RR/2qN2n1/n2n4",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "067.png": {
+  "box": [
+   7,
+   287,
+   400
+  ],
+  "fen": "4B3/4ppP1/B2R4/np2P3/1N6/k2K4/8/1B3nb1",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "068.png": {
+  "box": [
+   377,
+   60,
+   480
+  ],
+  "fen": "8/1r4k1/p7/8/p7/5K1r/8/8",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "069.png": {
+  "box": [
+   16,
+   247,
+   328
+  ],
+  "fen": "2N1bN1B/b1N5/1n4P1/4b1k1/4pKPp/8/5P2/5b2",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "070.png": {
+  "box": [
+   20,
+   20,
+   600
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "square"
+ },
+ "071.png": {
+  "box": [
+   16,
+   212,
+   328
+  ],
+  "fen": "B5q1/1R5n/4p1b1/k2K4/N2p1PP1/6R1/P7/1Q6",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "072.png": {
+  "box": [
+   219,
+   40,
+   520
+  ],
+  "fen": "6n1/5p2/1Kr3p1/bP1B1BBP/2bNQ2B/5N2/2pqp1kP/n4R2",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "073.png": {
+  "box": [
+   11,
+   238,
+   392
+  ],
+  "fen": "r2B1BnN/3B1N1P/q2k2bp/7B/n2nb1nP/2K5/QqPP1BPn/NQN2NNn",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "074.png": {
+  "box": [
+   19,
+   282,
+   376
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "075.png": {
+  "box": [
+   56,
+   56,
+   488
+  ],
+  "fen": "2KkN1n1/2Rr4/nP1b1q2/1pR3P1/8/P7/b6N/2R5",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "square"
+ },
+ "076.png": {
+  "box": [
+   60,
+   60,
+   520
+  ],
+  "fen": "4R3/8/8/2p5/8/8/p5K1/2bk2Nr",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "square"
+ },
+ "077.png": {
+  "box": [
+   11,
+   228,
+   368
+  ],
+  "fen": "2N1kn2/n7/3N4/P7/4n3/n1r2RR1/1p1R1KPB/8",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "078.png": {
+  "box": [
+   8,
+   8,
+   624
+  ],
+  "fen": "3N4/7R/1p6/1q1k1p2/7N/4K3/8/5n2",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "square"
+ },
+ "079.png": {
+  "box": [
+   148,
+   84,
+   344
+  ],
+  "fen": "8/8/7P/b6k/8/8/8/5K2",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "080.png": {
+  "box": [
+   295,
+   84,
+   432
+  ],
+  "fen": "N1B2N2/1p4p1/nBb5/3p1P2/1R1RQr1r/1Q5K/PPRp2P1/2RN2k1",
+  "theme": "green",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "081.png": {
+  "box": [
+   15,
+   229,
+   360
+  ],
+  "fen": "5N1n/BK2b3/P4p1k/2N4r/7R/2b1R3/P7/7N",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "082.png": {
+  "box": [
+   15,
+   219,
+   384
+  ],
+  "fen": "N3N3/1PRPn3/5nr1/5r2/P1b5/1nK2bPB/1P2P3/nk2R2n",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "083.png": {
+  "box": [
+   23,
+   293,
+   368
+  ],
+  "fen": "3N4/1Q1kPK2/r6N/2p1b3/2p2n2/5r1p/p4R2/5n2",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "084.png": {
+  "box": [
+   2,
+   2,
+   496
+  ],
+  "fen": "1B2RNbB/1n2P2B/2Q5/B1nRn3/np1P1p1P/1k1n1r2/2np1P2/1nK1B3",
+  "theme": "green",
+  "flipped": true,
+  "kind": "square"
+ },
+ "085.png": {
+  "box": [
+   4,
+   202,
+   352
+  ],
+  "fen": "8/5p1p/8/r1n5/1p2p1k1/5r2/8/5K2",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "086.png": {
+  "box": [
+   311,
+   78,
+   544
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "087.png": {
+  "box": [
+   258,
+   60,
+   480
+  ],
+  "fen": "R3nknB/1N2n2p/1n1q1b2/4P1K1/1P5n/ppR2Bp1/3b4/5N2",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "088.png": {
+  "box": [
+   16,
+   16,
+   608
+  ],
+  "fen": "4N3/p5p1/N5p1/p2p1k2/P7/7K/8/2N5",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "square"
+ },
+ "089.png": {
+  "box": [
+   22,
+   22,
+   456
+  ],
+  "fen": "2n5/6B1/3P2p1/1p1P4/1R1PP3/bnNb1K2/2k5/5R2",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "square"
+ },
+ "090.png": {
+  "box": [
+   15,
+   240,
+   384
+  ],
+  "fen": "1b1N1n1N/5N2/3n2Bk/1P6/1n1p4/8/3pPKPP/3R4",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "091.png": {
+  "box": [
+   50,
+   50,
+   400
+  ],
+  "fen": "3b4/1pPq2P1/1PKR1P1k/Q4R2/6R1/bP2p1p1/3p4/1n5r",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "square"
+ },
+ "092.png": {
+  "box": [
+   25,
+   58,
+   584
+  ],
+  "fen": "3b4/7P/4P3/2n3B1/1b2rk2/2N5/pQ5K/1N4NQ",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "093.png": {
+  "box": [
+   12,
+   188,
+   336
+  ],
+  "fen": "K7/7k/4q2n/p2R2Pq/8/1r4R1/2q2p2/3R2n1",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "094.png": {
+  "box": [
+   15,
+   264,
+   384
+  ],
+  "fen": "2k5/8/K7/7R/3B4/6r1/8/8",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "095.png": {
+  "box": [
+   8,
+   219,
+   344
+  ],
+  "fen": "1b3n1N/N6r/nPBPKN1p/5p1n/1nB5/2p2P1n/1BP1p2B/n5Nk",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "096.png": {
+  "box": [
+   116,
+   48,
+   408
+  ],
+  "fen": "3Qb2N/rR2Kpn1/B7/4NN2/8/2q5/5kP1/8",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "097.png": {
+  "box": [
+   19,
+   262,
+   376
+  ],
+  "fen": "1n4k1/8/1K6/1p2N3/8/p6p/8/3b4",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "098.png": {
+  "box": [
+   14,
+   14,
+   472
+  ],
+  "fen": "K3q3/2kN4/3NRN2/b1b1N3/3R4/4b3/1P5Q/n7",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "square"
+ },
+ "099.png": {
+  "box": [
+   7,
+   264,
+   400
+  ],
+  "fen": "8/p4p2/K4B2/1b1p4/3P4/1k6/r4P2/n4nn1",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "100.png": {
+  "box": [
+   438,
+   56,
+   528
+  ],
+  "fen": "3bBr2/8/8/2Kp4/3P4/3p4/3P4/3k4",
+  "theme": "green",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "101.png": {
+  "box": [
+   124,
+   56,
+   392
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "102.png": {
+  "box": [
+   8,
+   185,
+   344
+  ],
+  "fen": "3k4/1K3N2/4P3/8/2n2p2/8/8/3n3N",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "103.png": {
+  "box": [
+   112,
+   27,
+   416
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "104.png": {
+  "box": [
+   356,
+   64,
+   512
+  ],
+  "fen": "N4r1r/P6N/Rp3BpR/p5P1/N1PpN2b/bp1nK1pk/b1B5/3rrb2",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "105.png": {
+  "box": [
+   124,
+   14,
+   352
+  ],
+  "fen": "4r1n1/q1P1Q1PR/4r1NP/1nqqP2P/Pp3Kk1/PQ3qR1/2BrR3/1N1n1Nqn",
+  "theme": "green",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "106.png": {
+  "box": [
+   132,
+   86,
+   376
+  ],
+  "fen": "n7/2p5/3pp3/8/3P1K2/3R4/1P2k3/2n4B",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "107.png": {
+  "box": [
+   292,
+   80,
+   480
+  ],
+  "fen": "b2n2N1/nbbrP3/pPrPpn2/3RPP2/B1Np1N1R/1kR1Rn1B/5K2/n2n3N",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "108.png": {
+  "box": [
+   108,
+   26,
+   424
+  ],
+  "fen": "5kNr/4q3/2r2n1n/5P2/8/7r/7K/r4b2",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "109.png": {
+  "box": [
+   3,
+   262,
+   384
+  ],
+  "fen": "NN1r1R1k/1bQ3nP/1N1PR3/1r3b2/3N1NpP/n1N1r1pR/4BK1N/5N1N",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "110.png": {
+  "box": [
+   4,
+   237,
+   352
+  ],
+  "fen": "3R1Q1N/1B1p4/1R6/3rP1Kp/3P3p/1P1P1b1p/kBn1Q3/4n3",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "111.png": {
+  "box": [
+   372,
+   72,
+   496
+  ],
+  "fen": "7k/3P1q2/4B2P/8/1PBp2p1/3b4/1B2K1n1/1NN5",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "112.png": {
+  "box": [
+   112,
+   30,
+   376
+  ],
+  "fen": "N4q2/4NP2/4K3/2p2Nnk/3P4/2n4p/4P3/1R2r1nN",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "113.png": {
+  "box": [
+   15,
+   251,
+   384
+  ],
+  "fen": "4n1n1/6r1/1p1K4/p1p5/p1q3rb/3N3k/8/3nb3",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "114.png": {
+  "box": [
+   120,
+   40,
+   400
+  ],
+  "fen": "1rRn2rn/1rb1n3/Bn4n1/ppK2Q2/1n1n3q/PpPp1p2/1nkb2Pn/6B1",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "115.png": {
+  "box": [
+   7,
+   217,
+   400
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "116.png": {
+  "box": [
+   344,
+   60,
+   520
+  ],
+  "fen": "1bN1b1Nn/1pbP1p1B/3PP1Np/P1R1NpB1/n1PNR2K/2QN3q/4bppP/4k3",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "117.png": {
+  "box": [
+   48,
+   48,
+   504
+  ],
+  "fen": "1RN3NB/2P1Pp2/k1P4q/n3P3/7N/1Q6/pP5P/1Kbr1Nq1",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "square"
+ },
+ "118.png": {
+  "box": [
+   4,
+   230,
+   352
+  ],
+  "fen": "2BNQ1N1/2P5/6n1/P4bB1/2R3B1/2bp3k/pK5P/rB2n2N",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "119.png": {
+  "box": [
+   128,
+   75,
+   344
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "120.png": {
+  "box": [
+   136,
+   68,
+   328
+  ],
+  "fen": "R1n4b/2B2Rpp/4kBnP/b2p1QBP/1r2R3/pK1rNPp1/3p2nN/1N1N4",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "121.png": {
+  "box": [
+   68,
+   42,
+   424
+  ],
+  "fen": "6n1/3pk3/4P3/1R3B2/RP6/B2Rb3/6RQ/1QKn3n",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "122.png": {
+  "box": [
+   375,
+   60,
+   480
+  ],
+  "fen": "n3n2r/1B3R2/6NP/P3q3/b3r2p/p1R3K1/1k6/1Bn2nQ1",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "123.png": {
+  "box": [
+   76,
+   89,
+   408
+  ],
+  "fen": "NbNB4/1k4RK/2rQb3/2R4n/1n3n2/3r4/2r5/2R3RN",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "124.png": {
+  "box": [
+   140,
+   41,
+   320
+  ],
+  "fen": "N1N3Nn/4r1P1/p2PPp2/6RN/2p5/K2kPpnp/5p1P/3bN3",
+  "theme": "green",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "125.png": {
+  "box": [
+   23,
+   231,
+   344
+  ],
+  "fen": "2N1NNb1/1R1B1QPK/3b4/3q4/4p3/5R2/8/N2rnk2",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "126.png": {
+  "box": [
+   8,
+   212,
+   344
+  ],
+  "fen": "1BbBNR2/n2Q1PRK/1n5p/2PkBppB/1Pqr3P/pP2NP2/Qr6/qRr1n3",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "127.png": {
+  "box": [
+   20,
+   3,
+   520
+  ],
+  "fen": "KR4NN/k1N1p3/3B2q1/nB6/2r3P1/4r1r1/QpN5/n3N1n1",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "128.png": {
+  "box": [
+   136,
+   33,
+   328
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "129.png": {
+  "box": [
+   10,
+   10,
+   480
+  ],
+  "fen": "1q4B1/8/1p4K1/4kR2/r1B4R/3PbNp1/n4PP1/2N2NR1",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "square"
+ },
+ "130.png": {
+  "box": [
+   112,
+   44,
+   376
+  ],
+  "fen": "1r1K4/7r/8/6p1/8/8/1B5k/8",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "131.png": {
+  "box": [
+   34,
+   34,
+   432
+  ],
+  "fen": "1NNN1nNN/6p1/1p6/1p1p2p1/K5N1/P2rr1Pr/1qp1rP2/Nn1k2n1",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "square"
+ },
+ "132.png": {
+  "box": [
+   64,
+   64,
+   512
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "square"
+ },
+ "133.png": {
+  "box": [
+   412,
+   102,
+   496
+  ],
+  "fen": "8/8/5n2/8/1P6/3R3B/2k1K3/4N3",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "134.png": {
+  "box": [
+   116,
+   52,
+   368
+  ],
+  "fen": "1N2k3/1P6/5Q1P/4Q1p1/4PK2/4nR2/4p2P/1n6",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "135.png": {
+  "box": [
+   116,
+   64,
+   408
+  ],
+  "fen": "R1N5/1nR2PPQ/1PR1nBrn/8/1NqP1bpk/KBqrPBNR/1NP2q2/4n2n",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "136.png": {
+  "box": [
+   20,
+   269,
+   320
+  ],
+  "fen": "4N3/Nk2p3/2q2p2/1pr1pP1b/B1K5/2qPB3/8/5N2",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "137.png": {
+  "box": [
+   28,
+   28,
+   544
+  ],
+  "fen": "1N1bnRnN/4R3/4r2B/1qP4k/RPP2PK1/R2P4/1q2B1QR/Bn1Qb1B1",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "square"
+ },
+ "138.png": {
+  "box": [
+   12,
+   216,
+   336
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "139.png": {
+  "box": [
+   3,
+   259,
+   408
+  ],
+  "fen": "8/8/8/1kK4p/8/8/7B/8",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "140.png": {
+  "box": [
+   40,
+   40,
+   560
+  ],
+  "fen": "nN1NBr2/6N1/2p5/1q2PQ1b/4Kp2/BR3p1r/1k2Q2b/2b1RB2",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "square"
+ },
+ "141.png": {
+  "box": [
+   88,
+   56,
+   528
+  ],
+  "fen": "5Nnn/1NRNN3/bB6/3pqP2/1p1b4/P1K4P/1B1NPQ2/1b2k1n1",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "142.png": {
+  "box": [
+   96,
+   0,
+   448
+  ],
+  "fen": "1rN2B1n/1p5b/3RK2b/P1k1pB2/2P1Q1Pp/pQ4Bp/1PN1pBNN/b3Nnq1",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "143.png": {
+  "box": [
+   153,
+   60,
+   520
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "144.png": {
+  "box": [
+   42,
+   42,
+   416
+  ],
+  "fen": "1BK4q/6Pp/P5Pp/8/1n3p2/3r1P2/2kprP2/N2R4",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "square"
+ },
+ "145.png": {
+  "box": [
+   15,
+   245,
+   360
+  ],
+  "fen": "6B1/7P/Kp3N1k/4R1p1/1b1n2Pn/P2r2p1/r7/8",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "146.png": {
+  "box": [
+   11,
+   237,
+   368
+  ],
+  "fen": "2q5/6K1/6k1/5r2/1r1p4/5pp1/4PR2/4q3",
+  "theme": "green",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "147.png": {
+  "box": [
+   71,
+   48,
+   544
+  ],
+  "fen": "b2Nn1rb/rP2rp2/Bp1R2p1/3pbKp1/3Bnpq1/R3n2p/b4k1p/1n1r4",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "148.png": {
+  "box": [
+   28,
+   28,
+   544
+  ],
+  "fen": "K7/1b6/1b3P2/2n4N/P2P4/1k6/PR4B1/1N1B4",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "square"
+ },
+ "149.png": {
+  "box": [
+   7,
+   282,
+   400
+  ],
+  "fen": "2N1n3/4N3/8/3p4/3qr3/1K1k1r2/5n2/nn1n4",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "150.png": {
+  "box": [
+   18,
+   18,
+   464
+  ],
+  "fen": "4rn2/1PRb3R/K3nq1R/7N/P7/3Q1q1k/1b2P3/1N2B1n1",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "square"
+ },
+ "151.png": {
+  "box": [
+   7,
+   253,
+   400
+  ],
+  "fen": "1BR1b1n1/3N3P/4Pq2/p2pb1p1/K1b3P1/bB1N3p/n7/NN2Qk1Q",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "152.png": {
+  "box": [
+   139,
+   90,
+   520
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "153.png": {
+  "box": [
+   19,
+   249,
+   352
+  ],
+  "fen": "2qq4/q7/1N2b3/b7/p2P1KB1/8/2k1P3/3N2N1",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "154.png": {
+  "box": [
+   4,
+   4,
+   592
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "square"
+ },
+ "155.png": {
+  "box": [
+   15,
+   265,
+   360
+  ],
+  "fen": "1R1nn1n1/b5n1/P1P3KN/2P1P3/p4r2/5k2/8/N7",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "156.png": {
+  "box": [
+   116,
+   16,
+   368
+  ],
+  "fen": "2Nb2N1/3bRN2/K1rR1kB1/n1N1n2P/2Q2Q1P/3r4/2R5/2r1Bn1N",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "157.png": {
+  "box": [
+   23,
+   225,
+   344
+  ],
+  "fen": "5kRn/pbP2Pp1/1p2NK1R/b1Pp1r2/1r2BP2/RB4nP/PPbP3p/2Nnq3",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "158.png": {
+  "box": [
+   15,
+   225,
+   360
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "159.png": {
+  "box": [
+   124,
+   46,
+   392
+  ],
+  "fen": "1n3K1q/4PP1p/3b1PN1/pp3Rp1/1pk1p1QB/1P2p3/1RP2P2/3q2Nn",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "160.png": {
+  "box": [
+   179,
+   78,
+   544
+  ],
+  "fen": "8/4RRrN/P1B1N3/1B1p2PK/1p4Pn/1b2n2b/kr2Q1p1/n1rN3n",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "161.png": {
+  "box": [
+   324,
+   80,
+   480
+  ],
+  "fen": "R4n2/8/P7/1K6/8/5k2/3p4/3N4",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "162.png": {
+  "box": [
+   43,
+   64,
+   512
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "163.png": {
+  "box": [
+   4,
+   4,
+   592
+  ],
+  "fen": "2nn1N1B/3q4/2N1kpP1/1p2NpP1/ppP1p3/Pp1ppP2/Pnn3bP/1K6",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "square"
+ },
+ "164.png": {
+  "box": [
+   140,
+   55,
+   360
+  ],
+  "fen": "NN1N3N/4R1P1/7P/N3k1N1/P1PK4/3P1RP1/3pb2q/8",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "165.png": {
+  "box": [
+   16,
+   32,
+   528
+  ],
+  "fen": "B2bNK2/3k3B/8/8/6p1/8/8/6N1",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "166.png": {
+  "box": [
+   364,
+   56,
+   528
+  ],
+  "fen": "2bN1N2/3pp3/1BKpNp2/2P2b2/p1b2NpP/1Pn1b3/k6B/5R2",
+  "theme": "green",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "167.png": {
+  "box": [
+   19,
+   258,
+   352
+  ],
+  "fen": "n2Kbn2/PN1kPP2/p1r3R1/1PPbn3/B2p2rP/P3pPpP/1P6/N2N2R1",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "168.png": {
+  "box": [
+   7,
+   268,
+   400
+  ],
+  "fen": "nN3Nq1/1P2p1q1/1P3p2/1PP3Rk/BpR1KP2/b4N1P/1Rq1n3/N3b2N",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "169.png": {
+  "box": [
+   4,
+   249,
+   352
+  ],
+  "fen": "N1NbnnN1/n1p1P1p1/b1Q3rB/NB1bp1PP/2K3r1/3BB1rb/4p3/RBNk3n",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "170.png": {
+  "box": [
+   124,
+   7,
+   352
+  ],
+  "fen": "Bk3Kn1/1r3Np1/8/3b2bN/4p1PB/5b2/8/8",
+  "theme": "green",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "171.png": {
+  "box": [
+   7,
+   248,
+   400
+  ],
+  "fen": "2NBBN2/r2B2p1/3P3p/1p2p3/pk1R4/6P1/1P4P1/6nK",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "172.png": {
+  "box": [
+   96,
+   14,
+   448
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "173.png": {
+  "box": [
+   390,
+   96,
+   448
+  ],
+  "fen": "2N2N2/pn3p2/n2P2kK/P1PPB1q1/2pp4/5Pbr/4p1P1/5nQ1",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "174.png": {
+  "box": [
+   72,
+   61,
+   416
+  ],
+  "fen": "1nnqn3/1PPp4/2pKp3/p1N1P3/7P/4p3/Np3R1k/N3n3",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "175.png": {
+  "box": [
+   16,
+   0,
+   528
+  ],
+  "fen": "1nN5/3k2K1/1n6/7q/4p3/5p2/8/4N3",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "176.png": {
+  "box": [
+   18,
+   18,
+   464
+  ],
+  "fen": "NK1r1qr1/n1n1P1P1/1prq1p2/R1pp1PPq/4rBP1/1p1P1k1N/4P3/n1b2NnN",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "square"
+ },
+ "177.png": {
+  "box": [
+   8,
+   218,
+   344
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "green",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "178.png": {
+  "box": [
+   244,
+   68,
+   504
+  ],
+  "fen": "nR4n1/1RP4p/RN6/1K6/8/2p5/Q7/3n2k1",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "179.png": {
+  "box": [
+   15,
+   227,
+   384
+  ],
+  "fen": "1nNn1b2/N1P3p1/pr6/1nRNr1K1/1Bn1nR1B/5R2/pR1qb3/NR2k2R",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "180.png": {
+  "box": [
+   11,
+   275,
+   392
+  ],
+  "fen": "2K3nq/1n3P2/3r4/p2rr3/1P1P4/8/3k4/8",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "181.png": {
+  "box": [
+   424,
+   72,
+   456
+  ],
+  "fen": "2NN3N/R1p1pq2/1k1p1P2/3Nbp1q/QP3BP1/R1b1PK2/1p2bpRQ/N3n3",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "desktop"
+ },
+ "182.png": {
+  "box": [
+   140,
+   49,
+   320
+  ],
+  "fen": "8/B7/1r3pP1/b5p1/3B2n1/bR6/3K1k2/3N4",
+  "theme": "green",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "183.png": {
+  "box": [
+   12,
+   12,
+   576
+  ],
+  "fen": "8/8/2Q5/1n6/8/4K3/8/2k5",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "square"
+ },
+ "184.png": {
+  "box": [
+   16,
+   191,
+   328
+  ],
+  "fen": "8/RQ1r4/1P6/5K2/3P1k2/1B6/5p2/8",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "185.png": {
+  "box": [
+   3,
+   243,
+   408
+  ],
+  "fen": "4B3/PK6/2N1p3/3R1p1n/q2P1P2/3p4/3B1PN1/2n3k1",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "186.png": {
+  "box": [
+   12,
+   234,
+   336
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "187.png": {
+  "box": [
+   376,
+   52,
+   496
+  ],
+  "fen": "3N2B1/1N2R2K/PR3b1b/1p2P1bb/5P2/4P2p/nN1kP1Br/2n1r2N",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "desktop"
+ },
+ "188.png": {
+  "box": [
+   23,
+   290,
+   368
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "189.png": {
+  "box": [
+   8,
+   257,
+   344
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "grey",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "190.png": {
+  "box": [
+   144,
+   83,
+   352
+  ],
+  "fen": "2n3N1/2p2P2/3N2p1/6R1/nKr1k2P/6R1/6Rr/2N2nN1",
+  "theme": "purple",
+  "flipped": true,
+  "kind": "crop"
+ },
+ "191.png": {
+  "box": [
+   16,
+   236,
+   328
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "brown",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "192.png": {
+  "box": [
+   38,
+   38,
+   424
+  ],
+  "fen": "1n1n2n1/3n2B1/b4Nn1/1N3N2/8/P2k3K/4bQ2/7n",
+  "theme": "blue",
+  "flipped": true,
+  "kind": "square"
+ },
+ "193.png": {
+  "box": [
+   3,
+   210,
+   384
+  ],
+  "fen": "NN1n1b2/3K1nP1/1R1Pq2B/7k/3pN1r1/7p/2n5/2N4N",
+  "theme": "grey",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "194.png": {
+  "box": [
+   104,
+   33,
+   432
+  ],
+  "fen": "2n4R/nrRPR1QN/B1pp3K/P4n2/pQ2NP2/3Q2B1/1pq3B1/nnn4k",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "195.png": {
+  "box": [
+   104,
+   2,
+   432
+  ],
+  "fen": "2r1K1n1/2P2P2/1N1kRrB1/bBq1pp1q/8/2r1P3/PPq4q/1b1N4",
+  "theme": "brown",
+  "flipped": false,
+  "kind": "crop"
+ },
+ "196.png": {
+  "box": [
+   19,
+   242,
+   352
+  ],
+  "fen": "4r1nn/4K3/7N/7k/4P2b/2r5/8/r7",
+  "theme": "green",
+  "flipped": true,
+  "kind": "phone"
+ },
+ "197.png": {
+  "box": [
+   15,
+   269,
+   384
+  ],
+  "fen": "5N1n/8/3p3P/8/n1K5/1Pk2n2/8/r7",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "phone"
+ },
+ "198.png": {
+  "box": [
+   18,
+   18,
+   464
+  ],
+  "fen": "8/2p5/4B3/1p2Bk1p/7P/1Q6/r3b3/5K2",
+  "theme": "blue",
+  "flipped": false,
+  "kind": "square"
+ },
+ "199.png": {
+  "box": [
+   7,
+   215,
+   400
+  ],
+  "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR",
+  "theme": "purple",
+  "flipped": false,
+  "kind": "phone"
+ }
+}

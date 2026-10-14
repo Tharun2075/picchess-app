@@ -26,7 +26,35 @@
     <button id="undo" type="button">Undo</button>
     <button id="flip" type="button">Flip board</button>
     <button id="start" type="button">Start position</button>
+    <button id="scan-open" type="button">Scan image</button>
   </div>
+  <section id="scan" aria-label="Scan image" hidden>
+    <h2>Scan image</h2>
+    <p class="note">Pick a screenshot or photo of a board. It stays on this device.</p>
+    <div class="row">
+      <label class="btn">Upload image<input id="scan-file" type="file" accept="image/*"></label>
+      <label class="btn">Take picture<input id="scan-cam" type="file" accept="image/*" capture="environment"></label>
+    </div>
+    <div id="scan-drop">or paste an image (Ctrl/Cmd+V) or drop it here</div>
+    <fieldset><legend>Which colour is at the bottom of the picture?</legend>
+      <label><input type="radio" name="scan-bottom" value="w" checked> White</label>
+      <label><input type="radio" name="scan-bottom" value="b"> Black</label>
+    </fieldset>
+    <fieldset><legend>Whose move is it?</legend>
+      <label><input type="radio" name="scan-turn" value="w" checked> White</label>
+      <label><input type="radio" name="scan-turn" value="b"> Black</label>
+    </fieldset>
+    <div id="scan-msg" role="status" aria-live="polite"></div>
+    <canvas id="scan-canvas" width="300" height="150"></canvas>
+    <div class="row"><button id="scan-redo" type="button" class="secondary">Find board again</button></div>
+    <p id="scan-tiles-note" class="note"></p>
+    <div id="scan-tiles"></div>
+    <p class="note">Piece recognition is not built yet (tickets 06-08). "Use this grid" opens the editor with an empty board, your two answers set, so you can place the pieces by hand.</p>
+    <div class="row">
+      <button id="scan-close" type="button" class="secondary">Cancel</button>
+      <button id="scan-use" type="button" disabled>Use this grid</button>
+    </div>
+  </section>
   <section id="editor" aria-label="Board editor" hidden>
     <div id="palette" role="toolbar" aria-label="Piece palette"></div>
     <div class="row">

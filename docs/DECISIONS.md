@@ -43,3 +43,13 @@
 - COOP/COEP are commented out in _headers because the engine is single-threaded and they would break nothing now but add risk.
 - vercel.json sits at repo root with outputDirectory "app"; Cloudflare is configured in its dashboard (build output dir app).
 - Offline proof is desktop headless Chrome via CDP (own-browser), same-origin http://127.0.0.1 (a secure context for service workers).
+
+## Ticket 05: image input + grid finding
+- Finder: own code, gradient projection over candidate (x, y, size) with a checker-pattern check; coarse-to-fine on 256 then 512 px maps. Idea from tensorflow_chessbot (line finding); no code copied. LiveChess2FEN (GPL) was not looked at or copied. No OpenCV.
+- Confidence is a blend of edge and checker agreement; it did not separate the 3 misses, so the UI always shows the overlay and corner dots instead of auto-trusting.
+- Below 0.35 confidence a centred default box is shown with the corners to drag.
+- Downscale to 1024 px max in a canvas; no upload, no network.
+- Test fixtures: 200 synthetic PNGs at 48 colours (3.3 MB) to keep the repo small; decoded by a small pure-JS PNG decoder in tests/helpers/png.mjs.
+- Pieces for synthetic renders are the vendored Chessnut SVGs (Apache-2.0) rasterised in headless Chrome (no cairo here); cm-chessboard's own set is not used.
+- "Use this grid" opens the editor with an empty board (recognition is tickets 06-08). `?scan=<relative url>&bottom=w&turn=w` auto-loads a same-origin image for the proof.
+- Sample image app/samples/sample-phone-green.png is fixture 005.

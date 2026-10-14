@@ -56,3 +56,19 @@ button.secondary { background: #5b5853; }
 #pgn-msg.bad { color: #e5534b; }
 footer { margin: 1.5rem 0 2rem; font-size: 13px; opacity: .8; }
 footer a { color: inherit; }
+
+#scan[hidden], #board-wrap[hidden] { display: none; }
+#scan h2 { margin: .4rem 0; font-size: 1.1rem; }
+#scan .note { font-size: .85rem; color: #aaa; margin: 4px 0 8px; }
+#scan fieldset { border: 1px solid #555; border-radius: 6px; margin: 8px 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+#scan fieldset label { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+#scan input[type=radio] { width: 22px; height: 22px; }
+.btn { position: relative; flex: 1; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 14px; border-radius: 8px; background: #4b7bb5; color: #fff; font-weight: 600; cursor: pointer; overflow: hidden; }
+.btn input { position: absolute; inset: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; font-size: 0; }
+#scan-drop { border: 2px dashed #666; border-radius: 8px; padding: 14px; margin: 8px 0; text-align: center; font-size: .9rem; color: #bbb; }
+#scan-drop.over { border-color: #4b7bb5; background: #2a3342; }
+#scan-canvas { width: 100%; height: auto; display: block; margin: 8px 0; border-radius: 6px; background: #1c1b19; touch-action: none; }
+#scan-msg { min-height: 1.3em; font-size: .95rem; }
+#scan-msg.bad { color: #ffb74d; }
+#scan-tiles { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; background: #000; margin-bottom: 10px; }
+#scan-tiles canvas { width: 100%; height: auto; display: block; }

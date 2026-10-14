@@ -86,3 +86,20 @@ See docs/DECISIONS.md: editor works on a copy, castling rights only ever auto-re
 - "Top three moves ... enable or disable": Stockfish hints with toggle, now offline.
 - "Two people sit on two sides of the phone": installable on a phone, pass-and-play, PGN to keep or share a game.
 - "Zero-fee product": static files only, free hosting, no accounts, no server calls.
+
+## Scan an image (ticket 05)
+"Scan image" (next to Start position) takes a screenshot or photo and finds the 8x8 grid. The picture is shrunk to at most 1024 px in a canvas and never leaves the device.
+- Get the picture in with Upload image, Take picture (`capture="environment"`, opens the camera on phones), paste (Ctrl/Cmd+V) or drag-drop.
+- Before recognition you answer two things: which colour is at the bottom of the picture, and whose move it is.
+- app/lib/grid.js is a classical finder (no ML): it searches for the square whose 9+9 grid lines have the strongest edges and checks the light/dark checker pattern. It returns box + confidence.
+- If the box is wrong or not found, drag the 4 yellow corner dots; app/lib/homography.js (4-point DLT) warps the quad to a 512x512 board and cuts 64 tiles in a8..h1 order for the chosen orientation.
+- "Use this grid" is a placeholder: there is no piece recognition yet (ONNX classifier is tickets 06-08). It opens the editor with an empty board, the chosen side to move and "I play" set, so pieces are placed by hand.
+- ml/render_screens.py makes the 200 synthetic screenshots (5 themes, chrome, margins, borders, flipped boards) in tests/fixtures/screens/ with truth.json. `python3 -m venv .venv && .venv/bin/pip install -r ml/requirements.txt && .venv/bin/python ml/render_screens.py tests/fixtures/screens 200`. Piece art in ml/assets/pieces is the Chessnut set (Apache-2.0) rendered to PNG.
+- Proof: docs/proof-05-image-input-screenshot-grid.png/.txt (tools/proof05.mjs).
+
+Example posts this answers:
+- "Take a picture of a chessboard ... living chessboard": camera/upload/paste of the board image, grid found, tiles cut; piece recognition comes next.
+- "Screenshot of a game, tell me the best move": the screenshot flow starts here; the grid is found, pieces still by hand for now.
+- "Two people sit on two sides of the phone": bottom colour and side to move are asked, so either side can scan.
+
+Known limits (ticket 05): the finder gets 197 of 200 synthetic screenshots within 2% of the board side; the 3 misses (038, 063, 158) are off by about one square, and its confidence does not separate them (0.92-1.0), so always glance at the overlay. Real photos with perspective need the corner dots. Only synthetic screenshots tested; not tried on a real iPhone or Android. Run tests with `npm test` (tests/grid.test.mjs, tests/homography.test.mjs).
