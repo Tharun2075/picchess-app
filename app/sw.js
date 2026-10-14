@@ -1,7 +1,7 @@
 // Service worker: precaches the whole app shell (pages, vendor files, Stockfish js+wasm) so the app works offline.
 // The block between the markers is rewritten by `node tools/stamp-sw.mjs`; tests/sw.test.mjs fails if it is stale.
 // BEGIN GENERATED
-const VERSION = "3c9a07679f71";
+const VERSION = "8e60d4204f38";
 const PRECACHE = [
   "./",
   "./engine/COPYING",
@@ -26,6 +26,8 @@ const PRECACHE = [
   "./manifest.webmanifest",
   "./samples/sample-phone-green.png",
   "./scan.js",
+  "./social-card-square.png",
+  "./social-card.png",
   "./style.css",
   "./vendor/chess.js/chess.js",
   "./vendor/chess.js/LICENSE",
