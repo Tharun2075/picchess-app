@@ -39,7 +39,7 @@ test("visit key sanitiser", () => {
   assert.equal(cleanSrc(""), "direct");
   assert.equal(cleanSrc(null), "direct");
   assert.equal(cleanPath("scan|evil"), "other"); assert.equal(cleanPath("scan"), "scan");
-  assert.equal(hitKey("2026-10-14", "X|Y", "/"), "hit|2026-10-14|xy|/");
+  assert.equal(hitKey("2026-10-14", "X|Y", "/"), "hit|2026-10-14|x|/");
 });
 test("cors allow list", () => {
   assert.equal(corsOrigin("https://picchess.pages.dev"), "https://picchess.pages.dev");

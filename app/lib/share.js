@@ -1,6 +1,6 @@
 // Opt-in sharing of a confirmed board as free training data, plus the anonymous visit counter.
 // The Worker origin is the ONE constant below; app/_headers connect-src must list exactly the same origin.
-export const SHARE_ORIGIN = "https://picchess-share.REPLACE-SUBDOMAIN.workers.dev";
+export const SHARE_ORIGIN = "https://picchess-share.picchess.workers.dev";
 export const SHARE_URL = SHARE_ORIGIN + "/share";
 export const HIT_URL = SHARE_ORIGIN + "/hit";
 export const APP_VERSION = "0.1";
