@@ -1,1 +1,6 @@
 Pillow>=10
+numpy
+onnxruntime
+torch>=2.3
+onnx
+onnxscript

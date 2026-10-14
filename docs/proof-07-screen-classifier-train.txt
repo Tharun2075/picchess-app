@@ -1,0 +1,33 @@
+Proof: ticket 07 screenshot classifier training
+No browser proof needed for this ticket; docs/screenshot.png remains the ticket 06 proof.
+
+Training (ml/train_squares.py, seed 7, device mps, deterministic: two runs gave byte-identical weights)
+epoch 1 loss 0.4790 val_tile_acc 0.98913
+epoch 2 loss 0.3766 val_tile_acc 0.99151
+epoch 3 loss 0.3651 val_tile_acc 0.99050
+epoch 4 loss 0.3580 val_tile_acc 0.99463
+epoch 5 loss 0.3536 val_tile_acc 0.99579
+epoch 6 loss 0.3502 val_tile_acc 0.99451
+epoch 7 loss 0.3474 val_tile_acc 0.99581
+epoch 8 loss 0.3453 val_tile_acc 0.99409
+epoch 9 loss 0.3433 val_tile_acc 0.99554
+epoch 10 loss 0.3412 val_tile_acc 0.99284
+epoch 11 loss 0.3398 val_tile_acc 0.99596
+epoch 12 loss 0.3386 val_tile_acc 0.99591
+epoch 13 loss 0.3374 val_tile_acc 0.99386
+epoch 14 loss 0.3360 val_tile_acc 0.99559
+epoch 15 loss 0.3347 val_tile_acc 0.99584
+best val tile acc 0.99596
+
+Eval of the SHIPPED file with onnxruntime (ml/eval.py, 1200 val boards, both orientations)
+val square 99.669%  whole-board exact 90.00%   (acceptance: >=99.5% and >=90%: met)
+held out (celtic/papercut/geo, unseen themes) square 90.77%, whole board 0.17% (not part of acceptance)
+
+Parity (100 random val tiles, onnxruntime fp32 vs PyTorch tilenet.pt): argmax agreement 100/100 (acceptance >=99%: met)
+int8 (data/model/tilenet.int8.onnx, 331 KB): cannot be loaded by onnxruntime CPU (ConvInteger not implemented); fp32 chosen.
+
+Generalisation probe (retrain without spatial set and purple theme, not shipped; ml/train_squares.py --exclude-set spatial --exclude-theme purple)
+val all 99.36% / 77.9%; unseen set spatial 98.49% square, 28.8% board; unseen theme purple 99.50% square, 78.4% board
+
+Shipped: app/models/squares-screen.onnx  1288341 bytes (1.23 MB, cap 8 MB)
+sha256 d52db71ece09ad72535c2a32b57d36dacadb96d732fab02864dbe08e04f8b9a8

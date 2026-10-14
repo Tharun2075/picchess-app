@@ -64,3 +64,13 @@
 - Tests are Python unittest, called from node via tests/dataset.test.mjs; skipped (with reason) when .venv is missing so `npm test` still runs on a clean checkout.
 - data/ is ignored except data/real_screens/README.md, labels.csv header and data/SOURCES.md; real screenshots stay ignored.
 - No VLM or external API anywhere; the classifier trained later ships as ONNX in the browser.
+
+## Ticket 07: screenshot square classifier
+- Own model, not fenshot: val 99.67% square / 90.0% board vs fenshot 95.0% / 51.1% on the same renders. Fenshot's code and class order are adapted (MIT, credited); vendor/fenshot trimmed to 1.3 MB and its .git removed.
+- Licence audit of lichess piece sets read from lila COPYING.md: all allow derivatives (Apache-2.0, CC0, MIT, CC BY 4.0), none dropped. Training-only, never shipped.
+- fp32 ONNX shipped (1.29 MB). The int8 dynamic-quantised file needs ConvInteger, which onnxruntime CPU cannot run, so it cannot be verified or used; the fp32 file is already small.
+- Training is deterministic: rerunning ml/train_squares.py on seed 7 gave a byte-identical model. An earlier model (plain augmentation, val 99.83% / 94.25%) was better on val but its training code was overwritten by later edits, so it was not shipped; the reproducible heavy-augmentation model was.
+- Held-out sets: celtic (MIT), papercut (CC BY), geo (own). Not part of acceptance; reported as a known limit.
+- Generalisation probe (not shipped): spatial excluded -> 98.5% / 28.8% on spatial; purple excluded -> 99.5% / 78.4%.
+- Bug fixed: stray local "import json" in train_squares.py after adding --exclude-set/--exclude-theme.
+- No browser proof for this ticket; docs/screenshot.png stays the ticket 06 proof.

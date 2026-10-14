@@ -86,6 +86,16 @@ def geo():
     return out
 
 
+def lichess(name):
+    """Lichess set rasterised by ml/fetch_lichess_pieces.py (training images only)."""
+    sheet = Image.open(HERE.parent / "data/lichess_pieces" / f"sheet_{name}.png").convert("RGBA")
+    pieces = "wK wQ wR wB wN wP bK bQ bR bB bN bP".split()
+    return {n: sheet.crop((i * N, 0, (i + 1) * N, N)) for i, n in enumerate(pieces)}
+
+
+_LICHESS = {"rhosgfx": "CC0-1.0", "fantasy": "MIT", "spatial": "MIT", "celtic": "MIT", "kiwen-suwi": "CC-BY-4.0",
+            "firi": "CC-BY-4.0", "totoy": "CC-BY-4.0", "papercut": "CC-BY-4.0"}
+
 SETS = {  # name: (builder, source, licence, held_out)
     "chessnut": (chessnut, "https://github.com/shaack/cm-chessboard (Chessnut set by Alexander Kuzmin)", "Apache-2.0", False),
     "glyph": (glyph, "Apple Symbols font, Unicode chess glyphs U+265A..265F rendered locally", "Apple font licence; local training images only, never redistributed", False),
@@ -93,3 +103,9 @@ SETS = {  # name: (builder, source, licence, held_out)
     "geo": (geo, "Own drawing code (ml/piece_sets.py)", "CC0", True),
     "serif": (lambda: letters("Supplemental/Times New Roman Bold.ttf", "square"), "Own drawing code + Times New Roman Bold letters rendered locally", "Own code MIT; font glyphs used for local training images only", True),
 }
+for _n, _l in _LICHESS.items():
+    SETS[_n] = ((lambda n=_n: lichess(n)), f"https://github.com/lichess-org/lila/tree/master/public/piece/{_n}", _l, _n in ("celtic", "papercut"))
+
+# Preset for the lichess-only dataset (no font-derived sets): train on chessnut + 6 lichess sets, hold out celtic, papercut, geo.
+LICHESS_TRAIN = ["chessnut", "rhosgfx", "fantasy", "spatial", "kiwen-suwi", "firi", "totoy"]
+LICHESS_HELD = ["celtic", "papercut", "geo"]

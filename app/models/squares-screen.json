@@ -1,0 +1,70 @@
+{
+  "file": "squares-screen.onnx",
+  "sha256": "d52db71ece09ad72535c2a32b57d36dacadb96d732fab02864dbe08e04f8b9a8",
+  "bytes": 1288341,
+  "opset": 17,
+  "ir_version": 8,
+  "input": {
+    "name": "tiles",
+    "dtype": "float32",
+    "shape": [
+      "n",
+      1024
+    ],
+    "layout": "NCHW-flat: each row is one 32x32 grayscale tile, row-major, reshaped to [n,1,32,32] inside the model",
+    "note": "Board crop resized to 256x256 (bilinear) after luma conversion 0.299R+0.587G+0.114B; split into 8x8 tiles of 32x32, image-oriented, row-major from top-left"
+  },
+  "normalisation": {
+    "type": "0..1",
+    "divide_by": 255,
+    "mean": 0,
+    "std": 1
+  },
+  "output": {
+    "name": "probs",
+    "dtype": "float32",
+    "shape": [
+      "n",
+      13
+    ],
+    "note": "softmax already applied"
+  },
+  "classes": [
+    "1",
+    "K",
+    "Q",
+    "R",
+    "B",
+    "N",
+    "P",
+    "k",
+    "q",
+    "r",
+    "b",
+    "n",
+    "p"
+  ],
+  "class_index": {
+    "0": "1",
+    "1": "K",
+    "2": "Q",
+    "3": "R",
+    "4": "B",
+    "5": "N",
+    "6": "P",
+    "7": "k",
+    "8": "q",
+    "9": "r",
+    "10": "b",
+    "11": "n",
+    "12": "p"
+  },
+  "class_note": "index 0 = empty ('1'); 1-6 = white K Q R B N P (uppercase); 7-12 = black k q r b n p (lowercase)",
+  "metrics_val": {
+    "square_acc": 0.99669,
+    "board_exact": 0.9,
+    "boards": 1200
+  },
+  "licence_note": "Weights trained by us on lichess piece sets (see docs/MODEL_CARD.md); architecture adapted from fenshot (MIT)",
+  "int8": "not shipped: dynamic-quantised file uses ConvInteger, which onnxruntime CPU cannot run"
+}

@@ -356,11 +356,14 @@ def main():
     ap.add_argument("--val", type=int, default=1200)
     ap.add_argument("--heldout", type=int, default=1800)
     ap.add_argument("--procs", type=int, default=0)
+    ap.add_argument("--lichess-only", action="store_true", help="train/val on chessnut + lichess free sets, held out celtic/papercut/geo")
     a = ap.parse_args()
     import os
     procs = a.procs or max(1, (os.cpu_count() or 2) - 1)
     train_sets = [k for k, v in piece_sets.SETS.items() if not v[3]]
     held_sets = [k for k, v in piece_sets.SETS.items() if v[3]]
+    if a.lichess_only:
+        train_sets, held_sets = piece_sets.LICHESS_TRAIN, piece_sets.LICHESS_HELD
     plan = [("train", a.train, TRAIN_THEMES, train_sets), ("val", a.val, TRAIN_THEMES, train_sets),
             ("heldout", a.heldout, HELDOUT_THEMES, held_sets)]
     stats = {}

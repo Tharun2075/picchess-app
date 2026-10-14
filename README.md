@@ -155,3 +155,9 @@ Example posts this answers:
 - "Zero-fee product": all generated locally with Pillow; no API, no download, no model call.
 
 Known limits (ticket 06): synthetic only, 5 piece sets and 14 themes (some piece art comes from system fonts, used for local training images only); positions are random playouts without castling, en passant or check rules; grey tiles only; accuracy on real screenshots is unmeasured until the owner adds some to `data/real_screens/`.
+
+### Screenshot model (ticket 07)
+A 1.3 MB ONNX classifier (app/models/squares-screen.onnx + .json) that labels each square of a cropped board screenshot (13 classes: empty, KQRBNP, kqrbnp). It is not wired into the page yet.
+- Train (about 6 minutes on Apple MPS, deterministic): `.venv/bin/python ml/train_squares.py`; export: `.venv/bin/python ml/export_onnx.py`; evaluate: `.venv/bin/python ml/eval.py --model app/models/squares-screen.onnx --splits val heldout`.
+- Results: val 99.67% per square, 90.0% whole board; unseen piece sets about 87-94% per square and almost never a whole board, so the user's correction step stays essential.
+- Third party: fenshot (MIT) code adapted and used as baseline; lichess piece sets (Apache-2.0, CC0, MIT, CC BY 4.0) as training images only. See docs/SCREENSHOT-MODEL.md, docs/MODEL_CARD.md, docs/THIRD-PARTY.md.
