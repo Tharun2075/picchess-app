@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#262421">
+<title>PicChess</title>
+<link rel="stylesheet" href="vendor/cm-chessboard/assets/chessboard.css">
+<link rel="stylesheet" href="vendor/cm-chessboard/assets/extensions/markers/markers.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <h1>PicChess</h1>
+  <div id="banner" role="status" aria-live="polite"></div>
+  <div id="board-wrap">
+    <div id="board"></div>
+    <div id="promo" hidden role="dialog" aria-label="Choose promotion piece"></div>
+  </div>
+  <div class="row">
+    <button id="undo" type="button">Undo</button>
+    <button id="flip" type="button">Flip board</button>
+    <button id="start" type="button">Start position</button>
+  </div>
+  <form id="fen-form" class="fen">
+    <label for="fen">Paste a FEN</label>
+    <textarea id="fen" rows="2" spellcheck="false" autocapitalize="off" autocomplete="off"
+      placeholder="r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R w KQkq - 2 3"></textarea>
+    <div id="fen-error" role="alert"></div>
+    <button type="submit">Load position</button>
+  </form>
+  <ol id="moves" aria-label="Moves"></ol>
+</main>
+<script type="module" src="main.js"></script>
+</body>
+</html>
