@@ -1,0 +1,362 @@
+{
+ "00.png": {
+  "fen": "2n1n3/B1p1R1p1/k3B3/1b1n4/BP1B4/1R3K2/pqp3RP/2nN4",
+  "orientation": "w",
+  "box": [
+   33.0,
+   33.0,
+   320.0
+  ],
+  "theme": "dark_olive",
+  "piece_set": "firi",
+  "val_index": 40
+ },
+ "01.png": {
+  "fen": "rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R",
+  "orientation": "b",
+  "box": [
+   0.0,
+   0.0,
+   288.0
+  ],
+  "theme": "purple",
+  "piece_set": "totoy",
+  "val_index": 62
+ },
+ "02.png": {
+  "fen": "5Q1q/7r/3Pk2p/3b1pp1/P4PP1/1p5K/3NPb1P/R4BR1",
+  "orientation": "w",
+  "box": [
+   0.0,
+   0.0,
+   640.0
+  ],
+  "theme": "purple",
+  "piece_set": "rhosgfx",
+  "val_index": 89
+ },
+ "03.png": {
+  "fen": "rn3b1r/3qpknp/p1p2p2/1p1p4/1PP5/P2PKPPp/b1N1P2P/RNQ2B1R",
+  "orientation": "w",
+  "box": [
+   10.0,
+   10.0,
+   176.0
+  ],
+  "theme": "purple",
+  "piece_set": "spatial",
+  "val_index": 174
+ },
+ "04.png": {
+  "fen": "r1b1k1nr/nppq2p1/4p2p/3p3P/p1B2p1R/N3PP2/1PPP2P1/RNBQK3",
+  "orientation": "b",
+  "box": [
+   92.0,
+   92.0,
+   288.0
+  ],
+  "theme": "ice",
+  "piece_set": "fantasy",
+  "val_index": 183
+ },
+ "05.png": {
+  "fen": "r6r/p2B4/Np4Pk/7p/PP6/2PP2q1/b2n3P/5K1R",
+  "orientation": "w",
+  "box": [
+   12.5,
+   12.5,
+   180.0
+  ],
+  "theme": "blue",
+  "piece_set": "chessnut",
+  "val_index": 258
+ },
+ "06.png": {
+  "fen": "n7/8/1p6/K2q4/P1k3P1/B7/4P1n1/br6",
+  "orientation": "b",
+  "box": [
+   0.0,
+   0.0,
+   144.0
+  ],
+  "theme": "midnight",
+  "piece_set": "kiwen-suwi",
+  "val_index": 280
+ },
+ "07.png": {
+  "fen": "2r1b1nr/1pp3pp/2q1kp2/p2p2N1/P1P3P1/b2K3B/3PP2P/RNBQ3R",
+  "orientation": "b",
+  "box": [
+   0.0,
+   0.0,
+   176.0
+  ],
+  "theme": "dark_olive",
+  "piece_set": "firi",
+  "val_index": 393
+ },
+ "08.png": {
+  "fen": "rnb1kb1r/pq2p2p/2pp3n/1p3Pp1/P7/R1NBP2N/1PPP1P1P/2BQKR2",
+  "orientation": "b",
+  "box": [
+   54.0,
+   54.0,
+   176.0
+  ],
+  "theme": "wood",
+  "piece_set": "chessnut",
+  "val_index": 395
+ },
+ "09.png": {
+  "fen": "r1bq1br1/1ppppkpp/p6n/P7/1n3p1P/B4P1N/2PPP1P1/RN1QKB1R",
+  "orientation": "w",
+  "box": [
+   66.25,
+   66.25,
+   400.0
+  ],
+  "theme": "purple",
+  "piece_set": "kiwen-suwi",
+  "val_index": 428
+ },
+ "10.png": {
+  "fen": "r2kqrn1/1pp1nb2/6N1/1B1p2P1/1PP1p1p1/7P/Pb1P2P1/RN2K2R",
+  "orientation": "w",
+  "box": [
+   7.15,
+   7.15,
+   176.8
+  ],
+  "theme": "wood",
+  "piece_set": "rhosgfx",
+  "val_index": 464
+ },
+ "11.png": {
+  "fen": "8/8/2B1p3/5Kbr/2p3pp/1P1p4/2B3Bk/B2n1rR1",
+  "orientation": "b",
+  "box": [
+   0.0,
+   0.0,
+   614.4
+  ],
+  "theme": "purple",
+  "piece_set": "firi",
+  "val_index": 479
+ },
+ "12.png": {
+  "fen": "8/5r2/p1P4b/p3kP2/1r2n2p/8/5N2/7K",
+  "orientation": "b",
+  "box": [
+   40.0,
+   40.0,
+   320.0
+  ],
+  "theme": "dark_slate",
+  "piece_set": "chessnut",
+  "val_index": 506
+ },
+ "13.png": {
+  "fen": "2N1k3/4bnp1/3P4/pr3pr1/2pP4/N7/PB1K2p1/R3Q2b",
+  "orientation": "b",
+  "box": [
+   297.6,
+   297.6,
+   1024.0
+  ],
+  "theme": "dark_olive",
+  "piece_set": "chessnut",
+  "val_index": 546
+ },
+ "14.png": {
+  "fen": "6R1/3b1R2/2b3B1/PR1r1q2/4r3/kp1p1P2/pR2PK2/1n2b3",
+  "orientation": "w",
+  "box": [
+   0.0,
+   0.0,
+   448.0
+  ],
+  "theme": "ice",
+  "piece_set": "firi",
+  "val_index": 758
+ },
+ "15.png": {
+  "fen": "r1b1k1Rr/pqpp4/1bR2p2/4p1Np/Pn6/1Q2P3/1B1pNP2/4KB2",
+  "orientation": "b",
+  "box": [
+   46.0,
+   46.0,
+   448.0
+  ],
+  "theme": "ice",
+  "piece_set": "rhosgfx",
+  "val_index": 768
+ },
+ "16.png": {
+  "fen": "1r1kr3/p1p1p1b1/n4n2/1p1p2pp/1PP2BbP/PR3P2/R3P3/1N2KBN1",
+  "orientation": "b",
+  "box": [
+   136.0,
+   136.0,
+   819.2
+  ],
+  "theme": "wood",
+  "piece_set": "kiwen-suwi",
+  "val_index": 776
+ },
+ "17.png": {
+  "fen": "rnNk4/p1p5/Ppb4r/8/4pN1p/4P1p1/1P1n1KPR/R1B2B2",
+  "orientation": "b",
+  "box": [
+   132.5,
+   132.5,
+   800.0
+  ],
+  "theme": "brown",
+  "piece_set": "kiwen-suwi",
+  "val_index": 799
+ },
+ "18.png": {
+  "fen": "1rb1k1n1/1ppp3r/3bP3/pPQ3pp/P3n1p1/N3B2P/2P1P1B1/1R2K1NR",
+  "orientation": "b",
+  "box": [
+   64.0,
+   64.0,
+   1024.0
+  ],
+  "theme": "brown",
+  "piece_set": "spatial",
+  "val_index": 820
+ },
+ "19.png": {
+  "fen": "rnb1kbnr/p2pppqp/6p1/Ppp5/1P6/N5PP/2PPPP2/R1BQKBNR",
+  "orientation": "b",
+  "box": [
+   0.0,
+   0.0,
+   320.0
+  ],
+  "theme": "brown",
+  "piece_set": "rhosgfx",
+  "val_index": 824
+ },
+ "20.png": {
+  "fen": "2br1k1r/3p1p2/6p1/pq1n4/QPB1PpPp/N4P1P/5BR1/4K2R",
+  "orientation": "b",
+  "box": [
+   52.8,
+   52.8,
+   512.0
+  ],
+  "theme": "grey",
+  "piece_set": "firi",
+  "val_index": 834
+ },
+ "21.png": {
+  "fen": "2b2b1r/1nr1pkpn/p6p/8/pPppPP2/1N4PB/1B1N3P/1R2K2R",
+  "orientation": "w",
+  "box": [
+   0.0,
+   0.0,
+   112.0
+  ],
+  "theme": "wood",
+  "piece_set": "chessnut",
+  "val_index": 928
+ },
+ "22.png": {
+  "fen": "3q3r/6r1/5b1n/1p2p3/4P2P/PpP1N2k/3P1N2/1RB1n1K1",
+  "orientation": "b",
+  "box": [
+   17.0,
+   17.0,
+   112.0
+  ],
+  "theme": "brown",
+  "piece_set": "spatial",
+  "val_index": 940
+ },
+ "23.png": {
+  "fen": "4k1n1/5p2/8/1n1K4/2p4n/4R3/3Pp3/8",
+  "orientation": "w",
+  "box": [
+   128.0,
+   128.0,
+   512.0
+  ],
+  "theme": "purple",
+  "piece_set": "spatial",
+  "val_index": 971
+ },
+ "24.png": {
+  "fen": "rn3r2/3pk2p/Q3p2n/4Pp2/RpPP1P1b/5K1N/1B2N1PP/5BR1",
+  "orientation": "b",
+  "box": [
+   48.0,
+   48.0,
+   384.0
+  ],
+  "theme": "purple",
+  "piece_set": "chessnut",
+  "val_index": 993
+ },
+ "25.png": {
+  "fen": "1n1q1kr1/rppb2p1/4Pp2/p2p1n2/PbPPPB1p/1P4P1/3N2BP/3QK1NR",
+  "orientation": "b",
+  "box": [
+   46.0,
+   46.0,
+   448.0
+  ],
+  "theme": "wood",
+  "piece_set": "spatial",
+  "val_index": 998
+ },
+ "26.png": {
+  "fen": "rn1n1k2/1p6/p2p4/1Qp5/2P4p/4P2P/P2K4/RbB1R3",
+  "orientation": "b",
+  "box": [
+   20.0,
+   20.0,
+   320.0
+  ],
+  "theme": "green",
+  "piece_set": "firi",
+  "val_index": 1013
+ },
+ "27.png": {
+  "fen": "1k4nr/1p3p1p/2Q2p2/5P2/2PpP1P1/1PN3bN/RB1PK2R/5B2",
+  "orientation": "w",
+  "box": [
+   118.4,
+   118.4,
+   716.8
+  ],
+  "theme": "midnight",
+  "piece_set": "spatial",
+  "val_index": 1037
+ },
+ "28.png": {
+  "fen": "r2qk2r/3nnp2/p1ppp1Qb/1p3b1p/1P5P/N2P3N/P1P1PPP1/R1BK1B1R",
+  "orientation": "b",
+  "box": [
+   22.1,
+   22.1,
+   176.8
+  ],
+  "theme": "dark_slate",
+  "piece_set": "fantasy",
+  "val_index": 1065
+ },
+ "29.png": {
+  "fen": "5bnr/2r1pk2/bppp1pP1/3P1n1p/pQP5/5N1P/RP1NP1P1/4KB1R",
+  "orientation": "w",
+  "box": [
+   0.0,
+   0.0,
+   208.0
+  ],
+  "theme": "dark_olive",
+  "piece_set": "totoy",
+  "val_index": 1173
+ }
+}

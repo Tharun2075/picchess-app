@@ -48,7 +48,7 @@
       <label class="btn">Take picture<input id="scan-cam" type="file" accept="image/*" capture="environment"></label>
     </div>
     <div id="scan-drop">or paste an image (Ctrl/Cmd+V) or drop it here</div>
-    <fieldset><legend>Which colour is at the bottom of the picture?</legend>
+    <fieldset><legend>Which colour is at the bottom of the picture? (guessed from the pieces)</legend>
       <label><input type="radio" name="scan-bottom" value="w" checked> White</label>
       <label><input type="radio" name="scan-bottom" value="b"> Black</label>
     </fieldset>
@@ -61,13 +61,25 @@
     <div class="row"><button id="scan-redo" type="button" class="secondary">Find board again</button></div>
     <p id="scan-tiles-note" class="note"></p>
     <div id="scan-tiles"></div>
-    <p class="note">Piece recognition is not built yet (tickets 06-08). "Use this grid" opens the editor with an empty board, your two answers set, so you can place the pieces by hand.</p>
+    <p class="note">The model runs in this page: nothing is uploaded. Next you get the board to check and correct.</p>
     <div class="row">
       <button id="scan-close" type="button" class="secondary">Cancel</button>
-      <button id="scan-use" type="button" disabled>Use this grid</button>
+      <button id="scan-use" type="button" disabled>Read the position</button>
     </div>
   </section>
   <section id="editor" aria-label="Board editor" hidden>
+    <div id="ed-check" role="status" aria-live="polite" hidden></div>
+    <div id="picker" hidden role="toolbar" aria-label="Pick a piece for the square"></div>
+    <div class="row" id="ed-recog" hidden>
+      <button id="ed-bw" type="button" class="secondary" aria-pressed="true">White at bottom</button>
+      <button id="ed-bb" type="button" class="secondary" aria-pressed="false">Black at bottom</button>
+    </div>
+    <div class="row" id="ed-tools">
+      <button id="ed-flip" type="button" class="secondary">Flip board</button>
+      <button id="ed-swap" type="button" class="secondary">Swap colours</button>
+      <button id="ed-reset" type="button" class="secondary" hidden>Reset to scan</button>
+    </div>
+    <p class="note" id="ed-help">Tap a square to pick its piece. Drag a piece to move it. Press and hold a square to clear it.</p>
     <div id="palette" role="toolbar" aria-label="Piece palette"></div>
     <div class="row">
       <button id="ed-clear" type="button">Clear</button>
@@ -121,7 +133,19 @@
       <button id="pgn-load" type="button">Load PGN / FEN</button>
     </div>
   </section>
-  <footer><a href="licenses.html">Licences</a> <span id="offline-state"></span></footer>
+  <section id="about" aria-label="About" hidden>
+    <h2>About PicChess</h2>
+    <p>Recognition runs entirely in your browser: the picture never leaves your device, and there is no server or account.</p>
+    <ul>
+      <li>Piece model: PicChess squares-screen (our own, trained on rendered boards in 30 piece sets and many themes).</li>
+      <li>Runtime: <a href="vendor/onnxruntime-web/LICENSE">onnxruntime-web</a> (MIT, Microsoft).</li>
+      <li>Board: cm-chessboard (MIT). Pieces: Chessnut (Apache-2.0). Rules: chess.js (BSD-2). Engine: Stockfish (GPL-3, <a href="engine/COPYING">licence</a>).</li>
+      <li>Full list with licence files: <a href="licenses.html">Licences</a>.</li>
+    </ul>
+    <p class="note">Accuracy counter: this device keeps a count of how many squares you corrected after each scan. It is stored only in this browser and never sent anywhere. <span id="acc-stat"></span></p>
+    <button id="about-close" type="button" class="secondary">Close</button>
+  </section>
+  <footer><a href="licenses.html">Licences</a> · <a href="#about" id="about-open">About</a> <span id="offline-state"></span></footer>
 </main>
 <script type="module" src="main.js"></script>
 </body>

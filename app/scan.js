@@ -1,6 +1,9 @@
 // "Scan image" panel: pick / take / paste / drop a picture, find the board grid, let the user fix the
-// 4 corners, warp to 512x512 and cut 64 tiles. Everything stays in this page: no network, no upload.
+// 4 corners, then read the position with the square classifier (onnxruntime-web, loaded on first use).
+// Everything stays in this page: no upload, no server call.
 import { findBoard, boxCorners } from "./lib/grid.js";
+import { recognise } from "./lib/recognise.js";
+import { loadModel } from "./lib/model.js";
 import { computeHomography, applyHomography, warpQuad, sliceTiles, squareNames } from "./lib/homography.js";
 
 const $ = (id) => document.getElementById(id);
@@ -9,7 +12,7 @@ const HANDLE = 14;
 
 export function initScan({ onOpen, onClose, onUseGrid }) {
   const canvas = $("scan-canvas"), ctx = canvas.getContext("2d", { willReadFrequently: true });
-  const st = { img: null, corners: null, tiles: null, board: null, drag: -1, found: null };
+  const st = { img: null, corners: null, tiles: null, board: null, drag: -1, found: null, t0: 0, manualBottom: false, reading: false };
 
   const bottom = () => document.querySelector("input[name=scan-bottom]:checked").value;
   const turn = () => document.querySelector("input[name=scan-turn]:checked").value;
@@ -19,6 +22,7 @@ export function initScan({ onOpen, onClose, onUseGrid }) {
   function close() { $("scan").hidden = true; onClose(); }
 
   async function loadBlob(blob) {
+    st.t0 = performance.now(); st.manualBottom = false;
     if (!blob || !blob.type.startsWith("image/")) return say("That is not an image.", true);
     open();
     say("Reading image...");
@@ -34,6 +38,27 @@ export function initScan({ onOpen, onClose, onUseGrid }) {
     st.img = ctx.getImageData(0, 0, w, h);
     st.base = ctx.getImageData(0, 0, w, h);
     detect();
+    if (st.found && st.found.confidence >= 0.35) readPosition(); // confident grid: go straight to the check step
+  }
+
+  // grid -> 64 tiles -> model -> position; hands the result to the editor ("check the board" step)
+  async function readPosition() {
+    if (st.reading || !st.corners) return;
+    st.reading = true; $("scan-use").disabled = true;
+    try {
+      say("Reading the position...");
+      const tm = performance.now();
+      const run = await loadModel();
+      const loadMs = performance.now() - tm, tr = performance.now();
+      const result = await recognise(st.img, st.corners, run, { bottom: st.manualBottom ? bottom() : null });
+      const t = { loadMs, readMs: performance.now() - tr };
+      document.querySelector(`input[name=scan-bottom][value=${result.bottom}]`).checked = true;
+      close();
+      onUseGrid({ turn: turn(), result, t0: st.t0, timing: t });
+    } catch (e) {
+      console.error(e);
+      say("Could not read the position. You can still set the pieces by hand.", true);
+    } finally { st.reading = false; $("scan-use").disabled = false; }
   }
 
   function detect() {
@@ -116,12 +141,11 @@ export function initScan({ onOpen, onClose, onUseGrid }) {
   for (const ev of ["dragenter", "dragover"]) drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); });
   for (const ev of ["dragleave", "drop"]) drop.addEventListener(ev, () => drop.classList.remove("over"));
   drop.addEventListener("drop", (e) => { e.preventDefault(); const f = [...(e.dataTransfer?.files || [])].find((x) => x.type.startsWith("image/")); if (f) loadBlob(f); });
-  for (const r of document.querySelectorAll("input[name=scan-bottom]")) r.addEventListener("change", () => { if (st.corners) refresh(); });
+  for (const r of document.querySelectorAll("input[name=scan-bottom]")) r.addEventListener("change", () => { st.manualBottom = true; if (st.corners) refresh(); });
   $("scan-redo").addEventListener("click", () => st.img && detect());
   $("scan-open").addEventListener("click", open);
   $("scan-close").addEventListener("click", close);
-  // Placeholder for tickets 06-08: no recognition yet. Hand the detected grid and the two answers to the editor.
-  $("scan-use").addEventListener("click", () => { if (st.tiles) { close(); onUseGrid({ bottom: bottom(), turn: turn(), tiles: st.tiles }); } });
+  $("scan-use").addEventListener("click", readPosition);
 
   // ?scan=<same-origin image url> opens the panel on that image (used by the proof run and for quick tries)
   async function loadUrl(url) { try { await loadBlob(await (await fetch(url)).blob()); } catch { say("Could not load that image.", true); } }

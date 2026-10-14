@@ -3,5 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "scripts": { "test": "node --test tests/" }
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "devDependencies": {
+    "onnxruntime-node": "^1.30.0",
+    "onnxruntime-web": "^1.30.0"
+  }
 }

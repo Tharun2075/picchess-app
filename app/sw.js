@@ -1,7 +1,10 @@
-// Service worker: precaches the whole app shell (pages, vendor files, Stockfish js+wasm) so the app works offline.
+// Service worker: precaches the app shell (pages, vendor files, Stockfish js+wasm) so the app works offline.
+// The recogniser files (onnxruntime-web wasm, the model: LAZY_PREFIXES) go into a second cache that fills the first time a scan runs.
 // The block between the markers is rewritten by `node tools/stamp-sw.mjs`; tests/sw.test.mjs fails if it is stale.
 // BEGIN GENERATED
-const VERSION = "fc0da8cd06db";
+const VERSION = "dafd04c162e7";
+const ML_VERSION = "1e302798d00f";
+const LAZY_PREFIXES = ["./vendor/onnxruntime-web/","./models/"];
 const PRECACHE = [
   "./",
   "./engine/COPYING",
@@ -18,14 +21,14 @@ const PRECACHE = [
   "./lib/game.js",
   "./lib/grid.js",
   "./lib/homography.js",
+  "./lib/model.js",
   "./lib/pgn.js",
   "./lib/position.js",
+  "./lib/recognise.js",
   "./lib/uci.js",
   "./licenses.html",
   "./main.js",
   "./manifest.webmanifest",
-  "./models/squares-screen.json",
-  "./models/squares-screen.onnx",
   "./samples/sample-phone-green.png",
   "./scan.js",
   "./social-card-square.png",
@@ -67,6 +70,8 @@ const PRECACHE = [
 ];
 // END GENERATED
 const CACHE = `picchess-${VERSION}`;
+const ML_CACHE = `picchess-ml-${ML_VERSION}`;
+const isLazy = (url) => LAZY_PREFIXES.some((p) => url.pathname.startsWith(new URL(p, self.registration.scope).pathname));
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -77,7 +82,7 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   event.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k.startsWith("picchess-") && k !== CACHE).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith("picchess-") && k !== CACHE && k !== ML_CACHE).map((k) => caches.delete(k))))
       .then(() => self.clients.claim()),
   );
 });
@@ -85,6 +90,17 @@ self.addEventListener("activate", (event) => {
 self.addEventListener("fetch", (event) => {
   const req = event.request;
   if (req.method !== "GET" || new URL(req.url).origin !== location.origin) return;
+  if (isLazy(new URL(req.url))) {
+    event.respondWith((async () => {
+      const cache = await caches.open(ML_CACHE);
+      const hit = await cache.match(req, { ignoreSearch: true });
+      if (hit) return hit;
+      const res = await fetch(req);
+      if (res.ok) cache.put(req, res.clone());
+      return res;
+    })());
+    return;
+  }
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     // ignoreSearch: "index.html?fen=..." is served from the cached shell.
