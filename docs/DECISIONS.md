@@ -74,3 +74,11 @@
 - Generalisation probe (not shipped): spatial excluded -> 98.5% / 28.8% on spatial; purple excluded -> 99.5% / 78.4%.
 - Bug fixed: stray local "import json" in train_squares.py after adding --exclude-set/--exclude-theme.
 - No browser proof for this ticket; docs/screenshot.png stays the ticket 06 proof.
+
+## Ticket 08: screenshot to FEN in the browser
+- onnxruntime-web, WASM backend, one thread: runs on every browser including iOS Safari, needs no cross-origin-isolation headers (threads need COOP/COEP, which static hosts and the service worker make awkward). The model is 1.2 MB with 64 tiny tiles, so a read takes about 50 ms; threads or WebGPU would add risk for no visible gain.
+- Lazy ML cache: the 12 MB wasm and the model are fetched only on the first scan and kept in a second service-worker cache (ML_CACHE), so the normal app install stays small and chess play offline is unaffected.
+- No server: picture, tiles and model all stay in the page. Nothing is uploaded.
+- "Check the board" is always shown after a read: the board editor opens prefilled, unsure squares are outlined, and Play stays locked until the user confirms. Unseen piece art is about 90% per square, so a silent result would be wrong.
+- Bottom colour is guessed from pawn/king positions and can be switched in the editor.
+- Proof: real browser at 390 px, held-out fixture 01 (totoy, purple, Black at bottom): 0 of 64 wrong, see docs/proof-08-screenshot-to-fen.txt. tools/serve.mjs is a static server with correct MIME types; tools/proof08.mjs drives the proof.

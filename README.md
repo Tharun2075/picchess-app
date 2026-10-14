@@ -21,6 +21,15 @@ Piece recognition for screenshots is being built this week. Today PicChess finds
 ## Coming
 An optional "help improve it" tick box. Boards and corrections that people choose to share will be published as a free, open dataset.
 
+## Scan a screenshot
+
+Open Scan, pick or take a picture (or paste or drop one) of a chess board. PicChess finds the board, cuts it into 64 squares, reads each square with a small model, and opens the board editor with the result. You then see a "Check the board" step: unsure squares are outlined, you fix any wrong piece, and confirm before you can play or ask the engine.
+
+- Everything stays in your browser. The picture is never uploaded; there is no server or account.
+- Works in desktop and phone browsers. The reader (about 14 MB of WASM plus a 1.2 MB model) downloads on first scan, then works offline.
+- Limits: it was trained on rendered boards in a handful of piece sets. Unfamiliar piece art, odd themes or photos of physical boards need correction (about 90% of squares right, rarely a perfect board). Always check it against your picture.
+- Proof: docs/proof-08-screenshot-to-fen.txt and docs/proof-08-screenshot-to-fen-390.png.
+
 ## Licence
 - App code: MIT (see LICENSE).
 - Stockfish is GPLv3 and unmodified. Source and licence: [app/engine/SOURCE.md](app/engine/SOURCE.md).

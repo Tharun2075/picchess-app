@@ -10,3 +10,7 @@ Source: https://github.com/lichess-org/lila (COPYING.md). chessnut Apache-2.0 Al
 
 ## Python tools (development only)
 Pillow (HPND), numpy (BSD), onnxruntime (MIT), onnx (Apache-2.0), PyTorch (BSD-3). None ships in the app.
+
+## onnxruntime-web (shipped, ticket 08)
+- Microsoft. MIT. app/vendor/onnxruntime-web/ (ort.wasm.min.mjs, ort-wasm-simd-threaded.mjs/.wasm, LICENSE). Runs the squares-screen model in the browser, loaded only on first scan. Listed in app/licenses.html.
+- fenshot is studied, not shipped (see above). papercut (CC BY 4.0) is held-out test art only; kiwen-suwi, firi, totoy (CC BY 4.0) were training art, credited in app/licenses.html.

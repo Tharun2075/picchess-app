@@ -1,0 +1,10 @@
+fixture: 01.png (piece set totoy, theme purple, bottom b)
+true FEN:      rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R
+predicted FEN: rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R   (read from the page, #ed-fen)
+scan result FEN: rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R
+squares wrong: 0 of 64
+flagged for the user to check: 4
+time to first result: 259 ms in page (model load 157 ms, read 53 ms); 503 ms wall incl. test overhead
+"Check the board" step visible: true; Play locked until confirmed: true
+horizontal overflow at 390 px: false
+console errors: none

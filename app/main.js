@@ -252,6 +252,7 @@ $("pgn-load").addEventListener("click", () => {
 
 // ---- Board editor ----
 // The editor works on its own copy (`edit`). `game` is only replaced when "Play this position" succeeds.
+let scanned = null; // set while the editor shows a fresh scan: { fen, flagged, turn }
 let editing = false, edit = null, iPlay = "w", tool = "move";
 const pieceSvg = (letter, cls = "") => {
   const key = (letter === letter.toUpperCase() ? "w" : "b") + letter.toLowerCase();
@@ -315,7 +316,7 @@ async function renderEdit() {
   const v = P.validate(edit);
   const errs = $("ed-errors");
   errs.replaceChildren(...v.errors.map((t) => Object.assign(document.createElement("li"), { textContent: t })));
-  $("ed-play").disabled = !v.ok;
+  $("ed-play").disabled = !v.ok || (scanned && !scanned.confirmed);
   const banner = $("banner");
   banner.className = "";
   banner.textContent = `Editing: ${edit.turn === "w" ? "White" : "Black"} to move, you play ${iPlay === "w" ? "White" : "Black"}.`;
@@ -323,6 +324,7 @@ async function renderEdit() {
   board.removeMarkers();
   await board.setPosition(P.toFen(edit).split(" ")[0], false);
   if (seq === editSeq && editing) await board.setOrientation(iPlay === "w" ? COLOR.white : COLOR.black);
+  if (seq === editSeq && editing && scanned) markFlagged();
 }
 
 function enterEdit(startPos = null, startIPlay = null) {
@@ -331,6 +333,7 @@ function enterEdit(startPos = null, startIPlay = null) {
   board.removeMarkers();
   drawArrows([], false);
   $("promo").hidden = true;
+  if (!startPos) scanned = null;
   edit = startPos || P.parseFen(game.fen).position;
   iPlay = startIPlay || game.orientation;
   editing = true;
@@ -340,8 +343,50 @@ function enterEdit(startPos = null, startIPlay = null) {
   renderEdit();
 }
 
+// "Check the board": always shown after a scan. Play stays locked until the user confirms the pieces match their picture.
+function markFlagged() {
+  board.removeMarkers(MARKER_TYPE.frame);
+  if (scanned.confirmed) return;
+  for (const i of scanned.flagged) board.addMarker(MARKER_TYPE.frame, P.sqName(i));
+}
+function startCheck(result) {
+  const n = result.flagged.length;
+  const box = $("ed-check");
+  box.hidden = false; $("ed-recog").hidden = false; $("ed-reset").hidden = false;
+  box.replaceChildren();
+  const h = Object.assign(document.createElement("strong"), { textContent: "Check the board" });
+  const p = Object.assign(document.createElement("p"), { textContent: `Compare it with your picture. ${n} square${n === 1 ? " is" : "s are"} outlined because the reader was unsure. Fix any wrong piece (pick a piece, tap the square), then confirm.` });
+  const ok = Object.assign(document.createElement("button"), { type: "button", id: "ed-confirm", textContent: "The board matches my picture" });
+  ok.addEventListener("click", () => { scanned.confirmed = true; box.hidden = true; renderEdit(); });
+  box.append(h, p, ok);
+  $("picker").hidden = true;
+  syncBottom();
+  renderEdit();
+}
+function syncBottom() {
+  $("ed-bw").setAttribute("aria-pressed", String(iPlay === "w"));
+  $("ed-bb").setAttribute("aria-pressed", String(iPlay === "b"));
+}
+for (const [id, c] of [["ed-bw", "w"], ["ed-bb", "b"]]) $(id).addEventListener("click", () => { iPlay = c; syncBottom(); renderEdit(); });
+$("ed-flip").addEventListener("click", () => { iPlay = iPlay === "w" ? "b" : "w"; syncBottom(); renderEdit(); });
+$("ed-swap").addEventListener("click", () => {
+  const sw = (c) => (c === c.toUpperCase() ? c.toLowerCase() : c.toUpperCase());
+  let next = edit;
+  for (let i = 0; i < 64; i++) { const sq = P.sqName(i), c = edit.board[i]; if (c) next = P.setPiece(next, sq, sw(c)); }
+  setEdit(next);
+});
+$("ed-reset").addEventListener("click", () => {
+  if (!scanned) return;
+  scanned.confirmed = false;
+  const pos = P.setTurn(P.parseFen(`${scanned.fen} w - - 0 1`).position, scanned.turn);
+  enterEdit(pos, iPlay); startCheck({ flagged: scanned.flagged });
+});
+
 function leaveEdit() {
   editing = false;
+  scanned = null;
+  board.removeMarkers(MARKER_TYPE.frame);
+  for (const id of ["ed-check", "ed-recog", "ed-reset", "picker"]) $(id).hidden = true;
   board.disableMoveInput();
   if (board.isSquareSelectEnabled()) board.disableSquareSelect(POINTER_EVENTS.pointerdown);
   $("editor").hidden = true;
@@ -352,6 +397,8 @@ function setEdit(next) { edit = next; renderEdit(); }
 
 $("edit").addEventListener("click", () => enterEdit());
 $("ed-cancel").addEventListener("click", () => { leaveEdit(); render(false); });
+$("about-open").addEventListener("click", (e) => { e.preventDefault(); $("about").hidden = false; });
+$("about-close").addEventListener("click", () => { $("about").hidden = true; });
 $("ed-clear").addEventListener("click", () => setEdit(P.emptyPosition()));
 $("ed-start").addEventListener("click", () => setEdit(P.startPosition()));
 for (const r of document.querySelectorAll("input[name=turn]")) r.addEventListener("change", () => setEdit(P.setTurn(edit, r.value)));
@@ -380,9 +427,12 @@ const SCAN_HIDE = ["play-row", "hints", "fen-form", "moves", "board-wrap", "bann
 const scan = initScan({
   onOpen: () => { engine.stop(); for (const id of SCAN_HIDE) $(id).hidden = true; },
   onClose: () => { for (const id of SCAN_HIDE) $(id).hidden = false; },
-  onUseGrid: ({ bottom, turn }) => {
-    // placeholder until the square classifier exists: empty board, answers carried over
-    enterEdit(P.setTurn(P.emptyPosition(), turn), bottom);
+  onUseGrid: ({ turn, result, t0, timing }) => {
+    const pos = P.setTurn(P.parseFen(`${result.fen} w - - 0 1`).position, turn);
+    scanned = { fen: result.fen, flagged: result.flagged, turn };
+    enterEdit(pos, result.bottom);
+    startCheck(result);
+    window.__picchess.lastScan = { fen: result.fen, bottom: result.bottom, flagged: result.flagged, ms: Math.round(performance.now() - t0), ...timing };
   },
 });
 window.__picchess.scan = scan;

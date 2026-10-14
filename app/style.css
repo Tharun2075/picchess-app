@@ -72,3 +72,10 @@ footer a { color: inherit; }
 #scan-msg.bad { color: #ffb74d; }
 #scan-tiles { display: grid; grid-template-columns: repeat(8, 1fr); gap: 1px; background: #000; margin-bottom: 10px; }
 #scan-tiles canvas { width: 100%; height: auto; display: block; }
+
+#ed-check[hidden], #ed-recog[hidden], #ed-reset[hidden], #picker[hidden], #about[hidden] { display: none; }
+#ed-check { border: 2px solid #ffb74d; border-radius: 8px; padding: 8px 10px; margin: 8px 0; }
+#ed-check p { margin: 4px 0 8px; font-size: .95rem; }
+#ed-check button { width: 100%; min-height: 48px; }
+#about { margin: 10px 0; }
+#about .note { font-size: .85rem; color: #aaa; }
