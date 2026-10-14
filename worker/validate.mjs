@@ -64,10 +64,8 @@ export const cleanSrc = (s) => {
   const t = String(s ?? "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 24);
   return t || "direct";
 };
-export const cleanPath = (p) => {
-  const t = String(p ?? "").toLowerCase().replace(/[^a-z0-9_\/.-]/g, "").slice(0, 40);
-  return t || "/";
-};
+// paths are a tiny allowlist so /hit cannot create unbounded KV keys
+export const cleanPath = (p) => (["/", "scan"].includes(String(p ?? "")) ? String(p) : "other");
 export const hitKey = (day, src, path) => `hit|${day}|${cleanSrc(src)}|${cleanPath(path)}`;
 
 export function corsOrigin(origin) {

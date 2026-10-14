@@ -38,7 +38,7 @@ test("visit key sanitiser", () => {
   assert.equal(cleanSrc("x".repeat(60)).length, 24);
   assert.equal(cleanSrc(""), "direct");
   assert.equal(cleanSrc(null), "direct");
-  assert.equal(cleanPath("scan|evil"), "scanevil");
+  assert.equal(cleanPath("scan|evil"), "other"); assert.equal(cleanPath("scan"), "scan");
   assert.equal(hitKey("2026-10-14", "X|Y", "/"), "hit|2026-10-14|xy|/");
 });
 test("cors allow list", () => {
