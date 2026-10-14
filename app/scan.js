@@ -154,12 +154,13 @@ export function initScan({ onOpen, onClose, onUseGrid }) {
   tick.checked = isShareOn();
   tick.addEventListener("change", () => setShareOn(tick.checked));
   async function shareContext() {
-    if (!st.base) return null;
-    const c = document.createElement("canvas"); c.width = st.base.width; c.height = st.base.height;
-    c.getContext("2d").putImageData(st.base, 0, 0);
-    const image = await encodeJpeg(c);
-    const corners = st.corners.map(([x, y]) => [Math.min(1, Math.max(0, x / c.width)), Math.min(1, Math.max(0, y / c.height))]);
-    return { image, source: st.source, corners };
+    if (!st.img || !st.corners) return null;
+    // only the warped, straightened board leaves the device: nothing outside the corner quad, and no corner numbers
+    const board = warpQuad(st.img, st.corners, 512);
+    const c = document.createElement("canvas"); c.width = board.width; c.height = board.height;
+    c.getContext("2d").putImageData(board, 0, 0);
+    const image = await encodeJpeg(c, 250 * 1024);
+    return { image, source: st.source };
   }
 
   // ?scan=<same-origin image url> opens the panel on that image (used by the proof run and for quick tries)

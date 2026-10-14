@@ -43,7 +43,7 @@
   </div>
   <section id="scan" aria-label="Scan image" hidden>
     <h2>Scan image</h2>
-    <p class="note">Pick a screenshot or photo of a board. Stays on this device unless you tick 'Help improve PicChess'.</p>
+    <p class="note">Pick a screenshot or photo of a board. Stays on this device unless you tick 'Help improve PicChess' (then only the cropped board is shared).</p>
     <div class="row">
       <label class="btn">Upload image<input id="scan-file" type="file" accept="image/*"></label>
       <label class="btn">Take picture<input id="scan-cam" type="file" accept="image/*" capture="environment"></label>
@@ -57,7 +57,7 @@
       <label><input type="radio" name="scan-turn" value="w" checked> White</label>
       <label><input type="radio" name="scan-turn" value="b"> Black</label>
     </fieldset>
-    <label class="share"><input type="checkbox" id="scan-share"> Help improve PicChess: share this board and my corrections as free, public training data</label>
+    <label class="share"><input type="checkbox" id="scan-share"> Help improve PicChess: only the cropped, straightened board (no other part of your picture) is shared, with the position, as public domain (CC0) training data</label>
     <div id="scan-msg" role="status" aria-live="polite"></div>
     <canvas id="scan-canvas" width="300" height="150"></canvas>
     <div class="row"><button id="scan-redo" type="button" class="secondary">Find board again</button></div>
@@ -137,14 +137,14 @@
   </section>
   <section id="about" aria-label="About" hidden>
     <h2>About PicChess</h2>
-    <p>Recognition runs entirely in your browser: the picture stays on your device unless you tick "Help improve PicChess" on the Scan panel. There is no account.</p>
+    <p>Recognition runs entirely in your browser: your picture stays on your device. If you tick "Help improve PicChess" on the Scan panel, only the cropped, straightened board is shared (see Privacy below). There is no account.</p>
     <ul>
       <li>Piece model: PicChess squares-screen (our own, trained on rendered boards in 30 piece sets and many themes).</li>
       <li>Runtime: <a href="vendor/onnxruntime-web/LICENSE">onnxruntime-web</a> (MIT, Microsoft).</li>
       <li>Board: cm-chessboard (MIT). Pieces: Chessnut (Apache-2.0). Rules: chess.js (BSD-2). Engine: Stockfish (GPL-3, <a href="engine/COPYING">licence</a>).</li>
       <li>Full list with licence files: <a href="licenses.html">Licences</a>.</li>
     </ul>
-    <p class="note">Privacy: if you tick the box, the picture, the board you confirmed and your corrections are sent once as free (CC0) training data. We also count visits per day and source, nothing else. No cookies, no tracking.</p>
+    <p class="note">Privacy: if you tick the box, only the cropped, straightened board (no other part of your picture) is sent once, with the position you confirmed and your corrections, as public domain (CC0) training data. We also count visits per day and source, nothing else. No cookies, no tracking.</p>
     <p class="note">Accuracy counter: this device keeps a count of how many squares you corrected after each scan. It is stored only in this browser and never sent anywhere. <span id="acc-stat"></span></p>
     <button id="about-close" type="button" class="secondary">Close</button>
   </section>

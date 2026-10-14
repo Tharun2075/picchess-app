@@ -19,7 +19,7 @@ for (const k of keys) {
   if (!k.name.startsWith("img/") || !m || m.is_canary) continue;
   const file = path.join(out, "images", k.name.slice(4));
   fs.writeFileSync(file, wr(["kv", "key", "get", k.name, "--namespace-id", id, "--remote"], "buffer"));
-  lines.push(JSON.stringify({ sha: m.sha, image: path.join("images", k.name.slice(4)), kind: m.kind, bottom: m.bottom, sideToMove: m.sideToMove, predictedFen: m.predictedFen, fen: m.fen, corners: m.corners, license: m.license, ts: m.ts }));
+  lines.push(JSON.stringify({ sha: m.sha, image: path.join("images", k.name.slice(4)), kind: m.kind, bottom: m.bottom, sideToMove: m.sideToMove, predictedFen: m.predictedFen, fen: m.fen, license: m.license, ts: m.ts }));
 }
 fs.writeFileSync(path.join(out, "manifest.jsonl"), lines.join("\n") + (lines.length ? "\n" : ""));
 console.log(`wrote ${lines.length} samples to ${out}`);

@@ -1,7 +1,8 @@
 // Pure validation for POST /share and the /hit counters. No I/O, so tests import it directly.
-export const MAX_BODY = 1.5 * 1024 * 1024;
-export const MAX_IMAGE = 1024 * 1024;
-const KEYS = ["image", "source", "orientation", "sideToMove", "predictedFen", "correctedFen", "corners", "appVersion"];
+export const MAX_BODY = 400 * 1024;
+export const MAX_IMAGE = 250 * 1024;
+export const MIN_SIDE = 256, MAX_SIDE = 1024; // the board crop is a square, 512 px from the app
+const KEYS = ["image", "source", "orientation", "sideToMove", "predictedFen", "correctedFen", "appVersion"];
 const PLACEMENT = /^[pnbrqkPNBRQK1-8]+(\/[pnbrqkPNBRQK1-8]+){7}$/;
 const FULL_FEN = /^[pnbrqkPNBRQK1-8\/]+ [wb] (-|[KQkq]{1,4}) (-|[a-h][36]) \d{1,3} \d{1,4}$/;
 
@@ -25,10 +26,23 @@ export function base64ToBytes(s) {
   for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
   return out;
 }
-// "jpg" | "webp" | null from the magic bytes (not the claim)
+// "jpg" | null from the magic bytes (not the claim); only jpeg is accepted now (the app's board crop)
 export function imageKind(b) {
-  if (b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff) return "jpg";
-  if (b.length > 12 && String.fromCharCode(...b.slice(0, 4)) === "RIFF" && String.fromCharCode(...b.slice(8, 12)) === "WEBP") return "webp";
+  return b.length > 3 && b[0] === 0xff && b[1] === 0xd8 && b[2] === 0xff ? "jpg" : null;
+}
+// decoded size from the first JPEG start-of-frame marker -> { w, h } | null
+export function jpegSize(b) {
+  let i = 2;
+  while (i + 9 < b.length) {
+    if (b[i] !== 0xff) return null;
+    const m = b[i + 1];
+    if (m === 0xff) { i++; continue; }
+    if (m === 0xd8 || m === 0x01 || (m >= 0xd0 && m <= 0xd7)) { i += 2; continue; }
+    const len = (b[i + 2] << 8) | b[i + 3];
+    if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) return { h: (b[i + 5] << 8) | b[i + 6], w: (b[i + 7] << 8) | b[i + 8] };
+    if (m === 0xda) return null;
+    i += 2 + len;
+  }
   return null;
 }
 
@@ -43,17 +57,14 @@ export function validateShare(body) {
   if (!bytes) return bad("image is not base64");
   if (bytes.length > MAX_IMAGE) return bad("image too large", 413);
   const ext = imageKind(bytes);
-  if (!ext) return bad("image must be jpeg or webp");
+  if (!ext) return bad("image must be jpeg");
+  const sz = jpegSize(bytes);
+  if (!sz || sz.w !== sz.h || sz.w < MIN_SIDE || sz.w > MAX_SIDE) return bad("image must be the square board crop (256..1024 px)");
   if (!["screenshot", "photo"].includes(body.source)) return bad("bad source");
   if (!["white", "black"].includes(body.orientation)) return bad("bad orientation");
   if (!["w", "b"].includes(body.sideToMove)) return bad("bad sideToMove");
   if (body.predictedFen !== "" && !placementOk(body.predictedFen)) return bad("bad predictedFen");
   if (!fenOk(body.correctedFen)) return bad("bad correctedFen");
-  if (body.corners !== null) {
-    const c = body.corners;
-    const ok = Array.isArray(c) && c.length === 4 && c.every((p) => Array.isArray(p) && p.length === 2 && p.every((n) => typeof n === "number" && Number.isFinite(n) && n >= 0 && n <= 1));
-    if (!ok) return bad("bad corners");
-  }
   if (typeof body.appVersion !== "string" || body.appVersion.length === 0 || body.appVersion.length > 32) return bad("bad appVersion");
   const { image, ...meta } = body;
   return { ok: true, value: meta, bytes, ext };
@@ -74,4 +85,10 @@ export function corsOrigin(origin) {
   if (!origin) return null;
   if (origin === "https://picchess.pages.dev") return origin;
   return /^http:\/\/localhost(:\d{1,5})?$/.test(origin) ? origin : null;
+}
+
+// salted, hourly-rotating hash of the caller address; only the hash is ever stored
+export async function ipKey(prefix, salt, hour, ip) {
+  const d = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`${salt || "picchess"}|${hour}|${ip}`));
+  return prefix + [...new Uint8Array(d)].map((b) => b.toString(16).padStart(2, "0")).join("").slice(0, 32);
 }

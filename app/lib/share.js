@@ -10,7 +10,7 @@ export const isShareOn = (store = globalThis.localStorage) => { try { return sto
 export const setShareOn = (on, store = globalThis.localStorage) => { try { store.setItem(LS_KEY, on ? "1" : "0"); } catch { /* private mode: choice just is not remembered */ } };
 
 // Send only when ticked AND the user has confirmed the position. Failures are silent, no retries.
-// ctx: { image (base64), source, corners (0..1 pairs | null), predictedFen }; confirmed: { fen, orientation }
+// ctx: { image (base64), source, predictedFen }; confirmed: { fen, orientation }
 export async function shareBoard({ ctx, correctedFen, orientation, enabled, fetchFn = globalThis.fetch, onDone = () => {} }) {
   if (!enabled || !ctx || !ctx.image || !correctedFen) return false;
   const body = {
@@ -20,7 +20,6 @@ export async function shareBoard({ ctx, correctedFen, orientation, enabled, fetc
     sideToMove: correctedFen.split(" ")[1],
     predictedFen: ctx.predictedFen || "",
     correctedFen,
-    corners: ctx.source === "photo" ? ctx.corners : null,
     appVersion: APP_VERSION,
   };
   try {
@@ -41,8 +40,8 @@ export function countVisit({ loc = globalThis.location, hist = globalThis.histor
 }
 export const countScan = (beacon = (u) => navigator.sendBeacon(u)) => { try { beacon(`${HIT_URL}?src=scan&p=scan`); } catch { /* silent */ } };
 
-// Re-encode an ImageData/canvas to jpeg that fits 1 MB (shrinks quality, then size). Browser only.
-export async function encodeJpeg(canvas, maxBytes = 900 * 1024) {
+// Re-encode a canvas to jpeg that fits 250 KB (shrinks quality, then size). Browser only.
+export async function encodeJpeg(canvas, maxBytes = 250 * 1024) {
   let c = canvas;
   for (let attempt = 0; attempt < 6; attempt++) {
     for (const q of [0.85, 0.7, 0.5]) {

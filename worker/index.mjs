@@ -1,8 +1,10 @@
 // PicChess share Worker: POST /share (opt-in training data), /hit and /stats (visit counts only).
 // No cookies, no accounts, no raw IPs, no content in logs. Free plan: two KV namespaces (KV = counters, SHARES = images), no R2.
-import { MAX_BODY, validateShare, corsOrigin, hitKey, cleanSrc, cleanPath } from "./validate.mjs";
+import { MAX_BODY, validateShare, corsOrigin, hitKey, cleanSrc, cleanPath, ipKey } from "./validate.mjs";
 
 const RATE_PER_HOUR = 20, DAILY_CAP = 900; // KV free tier allows 1000 writes/day in total; /hit batching keeps the rest small
+const HIT_PER_HOUR = 60;
+const STATS_KEY_LIMIT = 1000;
 const HIT_FLUSH_MS = 3600000;
 const utcDay = (d = new Date()) => d.toISOString().slice(0, 10);
 const sha256hex = async (data) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", data))].map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -33,8 +35,8 @@ async function share(req, env, now) {
   // per-IP limit: only a salted, hourly-rotating hash is kept, never the address
   const ip = req.headers.get("cf-connecting-ip") || "unknown";
   const hour = now.toISOString().slice(0, 13);
-  const ipKey = "rl|" + (await sha256hex(new TextEncoder().encode(`${env.SALT || "picchess"}|${hour}|${ip}`))).slice(0, 32);
-  const used = parseInt((await env.KV.get(ipKey)) || "0", 10);
+  const rlKey = await ipKey("rl|", env.SALT, hour, ip);
+  const used = parseInt((await env.KV.get(rlKey)) || "0", 10);
   if (used >= RATE_PER_HOUR) return reject(req, 429, "rate limit");
 
   const day = utcDay(now), capKey = "cap|" + day;
@@ -51,7 +53,7 @@ async function share(req, env, now) {
   const meta = { sha, ...v.value, kind: v.value.source, bottom: v.value.orientation, fen: v.value.correctedFen, license: "CC0", ts: now.toISOString(), receivedAt: utcDay(now) };
   try {
     const isNew = !(await env.SHARES.getWithMetadata(key, "arrayBuffer")).metadata;
-    await env.KV.put(ipKey, String(used + 1), { expirationTtl: 7200 });
+    await env.KV.put(rlKey, String(used + 1), { expirationTtl: 7200 });
     await env.SHARES.put(key, v.bytes, { metadata: meta });
     if (isNew) await bump(env.KV, capKey, 2 * 86400);
   } catch { return reject(req, 503, "try later"); } // e.g. KV daily write limit reached
@@ -62,8 +64,15 @@ async function share(req, env, now) {
 
 // Counts are batched per isolate: the first hit of a key writes at once, later hits are added to the
 // pending total and flushed at most once per hour per key. Approximate by design (free KV write budget).
-const hitState = new WeakMap();
+const hitState = new WeakMap(), hitSeen = new WeakMap(); // hitSeen: per-isolate hourly-hash counters, no KV write
 async function hit(req, env, url, now) {
+  const noContent = (extra = 204) => new Response(null, { status: extra, headers: { "cache-control": "no-store", "access-control-allow-origin": corsOrigin(req.headers.get("origin")) || "*" } });
+  // same salted per-IP hourly limit as /share; read-only while under it (a counted hit is one KV read, no write), and never a write for an over-limit caller
+  const hk = await ipKey("hr|", env.SALT, now.toISOString().slice(0, 13), req.headers.get("cf-connecting-ip") || "unknown");
+  const seen = hitSeen.get(env.KV) || hitSeen.set(env.KV, new Map()).get(env.KV);
+  const c = (seen.get(hk) || 0) + 1; seen.set(hk, c);
+  if (seen.size > 5000) seen.clear();
+  if (c > HIT_PER_HOUR) return noContent(429);
   const src = cleanSrc(url.searchParams.get("src")), p = cleanPath(url.searchParams.get("p"));
   const key = hitKey(utcDay(now), src, p);
   let st = hitState.get(env.KV); if (!st) hitState.set(env.KV, st = new Map());
@@ -76,16 +85,17 @@ async function hit(req, env, url, now) {
       await env.KV.put(key, String(n), { expirationTtl: 40 * 86400 });
     } catch { e.pending += add; }
   }
-  return new Response(null, { status: 204, headers: { "cache-control": "no-store", "access-control-allow-origin": corsOrigin(req.headers.get("origin")) || "*" } });
+  return noContent();
 }
 
 async function stats(req, env, url, now) {
   const days = Math.max(1, Math.min(31, parseInt(url.searchParams.get("days") || "7", 10) || 7));
-  const out = {}; let scans = 0;
-  for (let i = 0; i < days; i++) {
+  const out = {}; let scans = 0, budget = STATS_KEY_LIMIT; // at most this many keys read in total, one list call per day
+  for (let i = 0; i < days && budget > 0; i++) {
     const day = utcDay(new Date(now.getTime() - i * 86400000));
-    const list = await env.KV.list({ prefix: `hit|${day}|` });
-    for (const k of list.keys) {
+    const list = await env.KV.list({ prefix: `hit|${day}|`, limit: Math.min(1000, budget) });
+    for (const k of list.keys.slice(0, budget)) {
+      budget--;
       const [, , src, path] = k.name.split("|");
       const n = parseInt((await env.KV.get(k.name)) || "0", 10);
       (out[day] ||= {})[src] = (out[day][src] || 0) + n;
