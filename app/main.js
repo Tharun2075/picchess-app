@@ -3,6 +3,7 @@ import { Markers, MARKER_TYPE } from "./vendor/cm-chessboard/src/extensions/mark
 import { Game, START_FEN } from "./lib/game.js";
 import { Engine } from "./lib/engine.js";
 import * as P from "./lib/position.js";
+import { exportPgn, importText } from "./lib/pgn.js";
 import { whiteScore, formatScore } from "./lib/uci.js";
 
 const $ = (id) => document.getElementById(id);
@@ -221,6 +222,33 @@ $("start").addEventListener("click", () => {
 $("flip").addEventListener("click", () => { game.flip(); render(false); });
 $("undo").addEventListener("click", () => { game.undo(); render(false); });
 
+// ---- PGN export / import ----
+const pgnMsg = (t, bad = false) => { $("pgn-msg").textContent = t; $("pgn-msg").className = bad ? "bad" : ""; };
+$("pgn-copy").addEventListener("click", async () => {
+  const text = exportPgn(game);
+  $("pgn-text").value = text;
+  try { await navigator.clipboard.writeText(text); pgnMsg("PGN copied."); }
+  catch { $("pgn-text").select(); pgnMsg("Copy blocked here: the text is selected, press copy on your keyboard.", true); }
+});
+$("pgn-download").addEventListener("click", () => {
+  const text = exportPgn(game);
+  $("pgn-text").value = text;
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: "application/x-chess-pgn" }));
+  a.download = "picchess.pgn";
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  pgnMsg("Downloaded picchess.pgn.");
+});
+$("pgn-load").addEventListener("click", () => {
+  const r = importText($("pgn-text").value);
+  if (!r.ok) return pgnMsg(r.error, true);
+  const l = game.loadLine(r.startFen, r.moves);
+  if (!l.ok) return pgnMsg(l.error, true);
+  pgnMsg(`Loaded ${r.moves.length} move(s).`);
+  render(false);
+});
+
 // ---- Board editor ----
 // The editor works on its own copy (`edit`). `game` is only replaced when "Play this position" succeeds.
 let editing = false, edit = null, iPlay = "w", tool = "move";
@@ -350,3 +378,11 @@ await loadPieceSprite();
 buildPalette();
 const initial = new URLSearchParams(location.search).get("fen");
 if (initial) { $("fen").value = initial; loadFromBox(); } else render(false);
+
+// ---- Offline (service worker) ----
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  navigator.serviceWorker.register("./sw.js").then(
+    () => { navigator.serviceWorker.ready.then(() => { $("offline-state").textContent = "Works offline."; }); },
+    () => { $("offline-state").textContent = ""; },
+  );
+}

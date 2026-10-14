@@ -7,7 +7,7 @@ h1 { font-size: 1.1rem; margin: 4px 0; }
 #banner.check { background: #6b5a1a; }
 #board-wrap { position: relative; width: 100%; touch-action: none; }
 #board { width: 100%; }
-.row { display: flex; gap: 8px; margin: 8px 0; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
 button { flex: 1; min-height: 44px; border: 0; border-radius: 6px; background: #4b7bb5; color: #fff; font: inherit; }
 button:active { background: #3a6293; }
 .fen { display: flex; flex-direction: column; gap: 6px; }
@@ -49,3 +49,10 @@ textarea { width: 100%; font: 14px ui-monospace, monospace; padding: 8px; border
 .fenrow button { flex: 0 0 72px; }
 #ed-errors { color: #ff8a80; margin: 6px 0; padding-left: 18px; min-height: 1.2em; }
 button.secondary { background: #5b5853; }
+
+#pgn { margin-top: 1rem; }
+#pgn textarea { width: 100%; box-sizing: border-box; font-family: ui-monospace, monospace; font-size: 13px; }
+#pgn-msg { min-height: 1.2em; font-size: 14px; }
+#pgn-msg.bad { color: #e5534b; }
+footer { margin: 1.5rem 0 2rem; font-size: 13px; opacity: .8; }
+footer a { color: inherit; }

@@ -50,13 +50,15 @@ Runs `node --test tests/` (game rules, editor model in tests/position.test.mjs, 
 - app/lib/uci.js, engine.js: UCI parsing and the Stockfish worker wrapper
 - app/engine/: Stockfish files, COPYING, SOURCE.md
 - tools/proof02.mjs, proof03.mjs: proof drivers
+- app/lib/pgn.js: PGN export / import; app/sw.js, manifest.webmanifest, icons/, _headers, licenses.html: PWA and hosting
+- tools/stamp-sw.mjs (precache list + version), make_icons.py, proof04.mjs; docs/DEPLOY.md, vercel.json
 - app/vendor/: chess.js, cm-chessboard, Chessnut pieces, each with its LICENSE (see app/vendor/README.md)
 - docs/: proof screenshot (docs/screenshot.png), DECISIONS.md
 
 ## Known limits
 - Engine download is about 1.8 MB; the first search is slower on phones. Each position is searched for 1.5 s.
 - Hints stop at game over. Not tested on a real phone.
-- No PWA manifest or service worker yet (installable app is a later ticket).
+- Offline needs one online first load; iOS may evict the cache of a site not opened for weeks. Install/offline was proven in desktop headless Chrome only, not on a real iPhone or Android.
 - No clocks, no resign/draw offer, no saving a game across reloads.
 - Undo goes back to the loaded position only, no redo.
 - The proof screenshot shows the FEN loaded via `?fen=`; drag and tap-tap were checked by logic tests of game.js, not by an automated browser run. Test them on a real phone.
@@ -69,3 +71,18 @@ See docs/DECISIONS.md: lite single-threaded build (no special server headers), M
 
 ## Decisions made headlessly (ticket 03)
 See docs/DECISIONS.md: editor works on a copy, castling rights only ever auto-removed (never auto-ticked), en passant limited to legal squares.
+
+## Release 1 (ticket 04): PGN, offline install, static hosting
+- **PGN**: under the move list, "Copy PGN", "Download .pgn" and "Load PGN / FEN". A game that began from a custom position gets `[SetUp "1"]` and `[FEN "..."]`. The box accepts a full PGN or a bare FEN.
+- **Offline / install**: `app/sw.js` precaches the page, vendor files and Stockfish (js + wasm). After one online load the app (including hints) works with no network; browsers offer "Install app" / "Add to Home Screen".
+- **Hosting**: `app/_headers` (Cloudflare Pages), `vercel.json` (Vercel Hobby), steps in docs/DEPLOY.md. Not deployed.
+- **After editing any file in app/** run `node tools/stamp-sw.mjs`; `npm test` fails if the stamp is stale. Icons: `python3 tools/make_icons.py`.
+- Licences: app/licenses.html (linked from the page footer).
+- Run: `cd app && python3 -m http.server 8000`, open http://localhost:8000 . Tests: `npm test`.
+- Proof: docs/proof-04-pgn-pwa-release1.txt/.png (server killed after first load, app still renders, plays, exports PGN and runs Stockfish hints). Driver: tools/proof04.mjs.
+
+### Who it answers
+- "Take a picture of a chessboard ... living chessboard": the editor and FEN/PGN import give the living board; photo recognition is a later ticket.
+- "Top three moves ... enable or disable": Stockfish hints with toggle, now offline.
+- "Two people sit on two sides of the phone": installable on a phone, pass-and-play, PGN to keep or share a game.
+- "Zero-fee product": static files only, free hosting, no accounts, no server calls.

@@ -1,0 +1,19 @@
+proof-04 offline PWA + PGN export
+RESULT: PASS
+online first load: {"caches":["picchess-cf717c57d3ae"],"entries":53,"controlled":true}
+engine wasm in cache: true
+controlled by service worker after reload: true
+static server stopped (fetch from this script fails): true
+offline reload (server down): {"title":"PicChess","squares":96,"pieces":32,"banner":"White to move.","offlineLabel":"Works offline.","online":true}
+PGN export offline:
+[Event "PicChess game"]
+[Site "PicChess"]
+[Date "2026.10.14"]
+[Round "-"]
+[White "?"]
+[Black "?"]
+[Result "*"]
+
+1. d4 d5 2. c4 *
+
+engine hints offline: 3 arrows after 0 ms; hints: dxc4 | +0.2 | depth 7 | e6 | +0.3 | depth 7 | c6 | +0.3 | depth 7

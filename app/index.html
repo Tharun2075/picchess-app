@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#262421">
 <title>PicChess</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
 <link rel="stylesheet" href="vendor/cm-chessboard/assets/chessboard.css">
 <link rel="stylesheet" href="vendor/cm-chessboard/assets/extensions/markers/markers.css">
 <link rel="stylesheet" href="style.css">
@@ -67,6 +70,18 @@
     <button type="submit">Load position</button>
   </form>
   <ol id="moves" aria-label="Moves"></ol>
+  <section id="pgn" aria-label="PGN">
+    <label for="pgn-text">PGN (export or import)</label>
+    <textarea id="pgn-text" rows="6" spellcheck="false" autocapitalize="off" autocomplete="off"
+      placeholder="Paste a PGN or FEN here, then press Load."></textarea>
+    <div id="pgn-msg" role="status" aria-live="polite"></div>
+    <div class="row">
+      <button id="pgn-copy" type="button">Copy PGN</button>
+      <button id="pgn-download" type="button">Download .pgn</button>
+      <button id="pgn-load" type="button">Load PGN / FEN</button>
+    </div>
+  </section>
+  <footer><a href="licenses.html">Licences</a> <span id="offline-state"></span></footer>
 </main>
 <script type="module" src="main.js"></script>
 </body>

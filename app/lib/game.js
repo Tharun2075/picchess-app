@@ -16,6 +16,8 @@ export function validateFen(fen) {
   return { ok: true, fen: full };
 }
 
+const m_name = (e) => String(e.message).split("\n")[0];
+
 export class Game {
   constructor(fen = START_FEN) {
     this.orientation = "w";
@@ -27,6 +29,17 @@ export class Game {
     const v = validateFen(fen);
     if (!v.ok) return v;
     this.chess = new Chess(v.fen);
+    this.startFen = v.fen;
+    return { ok: true };
+  }
+
+  /** Replay a start FEN plus SAN moves (from pgn.js importText). Untouched on failure. */
+  loadLine(startFen, moves) {
+    const v = validateFen(startFen);
+    if (!v.ok) return v;
+    const c = new Chess(v.fen);
+    try { for (const m of moves) c.move(m); } catch (e) { return { ok: false, error: `Illegal move in PGN: ${m_name(e)}` }; }
+    this.chess = c;
     this.startFen = v.fen;
     return { ok: true };
   }
