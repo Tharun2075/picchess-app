@@ -1,0 +1,14 @@
+# Real Stockfish 19 lite-single (WASM) output recorded 2026-10-14 in headless Chrome; MultiPV 3.
+# Section: middlegame multipv lines (cp), 2 bound lines, mate lines, bestmove
+info depth 16 seldepth 28 multipv 1 score cp 19 nodes 664818 nps 729767 hashfull 223 time 911 pv d6d5 e1c1 c6d4 d2d4 f6e4 d4d5 e4d6 e3d4 c8e6 d5c5 d8c8 c5c8 a8c8 d4g7 g8g7 f1d3
+info depth 17 seldepth 18 multipv 1 score cp 17 nodes 864953 nps 720794 hashfull 289 time 1200 pv d6d5 e1c1 c6d4 d2d4 f6e4 d4d5 e4d6 e3d4 c8e6 d5c5 d8c8 c5c8 a8c8 d4g7 g8g7 f1d3 c8c5
+info depth 17 seldepth 25 multipv 2 score cp -11 nodes 864953 nps 720794 hashfull 289 time 1200 pv c6d4 e3d4 c8e6 h2h4 h7h5 e1c1 d8a5 d2g5 a5g5 h4g5 f6h7 f3f4 e6g4 d4g7 g8g7 d1e1 f8c8
+info depth 16 seldepth 18 multipv 3 score cp -26 nodes 664818 nps 728967 hashfull 223 time 912 pv a8b8 g2g4 c8d7 h2h4 b7b5 d4c6 d7c6 h4h5 d8a5 c3e2 a5d2 e1d2 f6d7
+info depth 16 seldepth 22 multipv 2 score cp -240 upperbound nodes 849595 nps 707995 hashfull 308 time 1200 pv e2a6 b4c3
+info depth 17 seldepth 24 multipv 3 score cp -34 upperbound nodes 864953 nps 720194 hashfull 289 time 1201 pv a8b8 g2g4
+info depth 20 seldepth 2 multipv 1 score mate 1 nodes 1534755 nps 1111335 hashfull 375 time 1381 pv a1a8
+info depth 21 seldepth 2 multipv 1 score mate 1 nodes 1670504 nps 1113669 hashfull 399 time 1500 pv a1a8
+bestmove d6d5 ponder e1c1
+bestmove a1a8
+info string NNUE evaluation using nn-61e7af4bb97d.nnue
+info depth 1 currmove e2e4 currmovenumber 1

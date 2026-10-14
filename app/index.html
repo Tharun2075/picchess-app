@@ -15,6 +15,7 @@
   <div id="banner" role="status" aria-live="polite"></div>
   <div id="board-wrap">
     <div id="board"></div>
+    <svg id="arrows" viewBox="0 0 8 8" aria-hidden="true"></svg>
     <div id="promo" hidden role="dialog" aria-label="Choose promotion piece"></div>
   </div>
   <div class="row">
@@ -22,6 +23,12 @@
     <button id="flip" type="button">Flip board</button>
     <button id="start" type="button">Start position</button>
   </div>
+  <section id="hints" aria-label="Engine hints">
+    <label class="toggle"><input type="checkbox" id="hints-toggle"> Engine hints</label>
+    <div id="hints-status" role="status" aria-live="polite"></div>
+    <p class="note">Top 3 moves from Stockfish. Eval is from White's point of view.</p>
+    <ol id="hints-list"></ol>
+  </section>
   <form id="fen-form" class="fen">
     <label for="fen">Paste a FEN</label>
     <textarea id="fen" rows="2" spellcheck="false" autocapitalize="off" autocomplete="off"
