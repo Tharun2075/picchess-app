@@ -1,4 +1,9 @@
 .venv/
-data/
+data/*
+!data/real_screens/
+data/real_screens/*
+!data/real_screens/README.md
+!data/real_screens/labels.csv
+!data/SOURCES.md
 node_modules/
 .DS_Store

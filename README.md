@@ -103,3 +103,25 @@ Example posts this answers:
 - "Two people sit on two sides of the phone": bottom colour and side to move are asked, so either side can scan.
 
 Known limits (ticket 05): the finder gets 197 of 200 synthetic screenshots within 2% of the board side; the 3 misses (038, 063, 158) are off by about one square, and its confidence does not separate them (0.92-1.0), so always glance at the overlay. Real photos with perspective need the corner dots. Only synthetic screenshots tested; not tried on a real iPhone or Android. Run tests with `npm test` (tests/grid.test.mjs, tests/homography.test.mjs).
+
+## Screenshot dataset (ticket 06)
+Training data for the screenshot square classifier (tickets 07-08). Nothing here is shipped in the app and no image is committed.
+- Make it (about 4 minutes, 1.6 GB in `data/screens/`, same result every time for the same seed):
+  ```
+  python3 -m venv .venv && .venv/bin/pip install -r ml/requirements.txt
+  .venv/bin/python ml/make_screen_dataset.py --out data/screens --seed 6
+  .venv/bin/python ml/make_dataset_card.py      # rewrites docs/DATASET.md and data/SOURCES.md
+  ```
+- Test: `npm test` (runs ml/test_dataset.py through tests/dataset.test.mjs; it skips with a message if `.venv` is missing). Directly: `.venv/bin/python ml/test_dataset.py`.
+- 21,000 boards: 18,000 train, 1,200 val (same themes and piece sets), 1,800 held out (4 themes and 2 piece sets never seen in training). 13 classes, 32x32 grey tiles, empty squares about 50% of tiles (cap 60%).
+- Real screenshots: drop them in `data/real_screens/` and list them in `labels.csv` (`file,fen,orientation`), see data/real_screens/README.md.
+- Card with class counts, themes, piece sets and licences: docs/DATASET.md; sources: data/SOURCES.md; sample: docs/dataset-sample.png.
+- Files: ml/make_screen_dataset.py (positions, rendering, slicing), ml/piece_sets.py, ml/make_dataset_card.py, ml/make_sample_sheet.py, ml/test_dataset.py.
+
+Example posts this answers:
+- "Take a picture of a chessboard ... living chessboard": the data to teach the browser model to read pieces off a board image.
+- "Screenshot of games from Instagram, Twitter": many themes, sizes, JPEG damage, blur, arrows, highlights, dark mode, coordinates.
+- "Two people on two sides of the phone": both orientations (white or black at the bottom) are generated and labelled.
+- "Zero-fee product": all generated locally with Pillow; no API, no download, no model call.
+
+Known limits (ticket 06): synthetic only, 5 piece sets and 14 themes (some piece art comes from system fonts, used for local training images only); positions are random playouts without castling, en passant or check rules; grey tiles only; accuracy on real screenshots is unmeasured until the owner adds some to `data/real_screens/`.

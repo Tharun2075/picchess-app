@@ -1,0 +1,49 @@
+PicChess ticket 06 proof: real run of the dataset generator, 2026-10-14T19:19:27Z
+
+$ ls data/screens/*/ (counts)
+train:    18000 images, 890635 tiles
+val:     1200 images, 59348 tiles
+heldout:     1800 images, 89090 tiles
+
+$ head -3 data/screens/train/labels.csv
+file,fen,orientation
+train/00000.jpg,3Q1n1k/5nrp/3p2P1/1p3p2/1p1P3R/P3BqPb/4PK2/4R3,b
+train/00001.jpg,5b2/1bp2pr1/4pq1k/6Bp/p3P1KP/3p3B/nrP5/2R5,w
+
+$ python ml/test_dataset.py
+./Users/thar/Projects/builds/picchess-next/ml/test_dataset.py:63: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/thar/Projects/builds/picchess-next/data/screens/train/labels.csv' mode='r' encoding='UTF-8'>
+  labels = list(csv.DictReader(open(d / "labels.csv")))
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/thar/Projects/builds/picchess-next/ml/test_dataset.py:65: ResourceWarning: unclosed file <_io.TextIOWrapper name='/Users/thar/Projects/builds/picchess-next/data/screens/train/tiles.csv' mode='r' encoding='UTF-8'>
+  for r in csv.DictReader(open(d / "tiles.csv")):
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.....
+----------------------------------------------------------------------
+Ran 6 tests in 1.636s
+
+OK
+
+$ npm test (tail)
+ℹ tests 87
+ℹ pass 87
+ℹ fail 0
+
+## Tiles per class (after the empty-square cap)
+
+| class | train | val | heldout |
+|---|---|---|---|
+| 0 empty | 446137 | 29718 | 44622 |
+| 1 wP | 102748 | 6871 | 10287 |
+| 2 wN | 28809 | 1876 | 2825 |
+| 3 wB | 28100 | 1838 | 2781 |
+| 4 wR | 31009 | 2088 | 3105 |
+| 5 wQ | 13614 | 901 | 1351 |
+| 6 wK | 18000 | 1200 | 1800 |
+| 7 bP | 102542 | 6878 | 10368 |
+| 8 bN | 28947 | 1894 | 2868 |
+| 9 bB | 28143 | 1899 | 2800 |
+| 10 bR | 30958 | 2081 | 3122 |
+| 11 bQ | 13628 | 904 | 1361 |
+| 12 bK | 18000 | 1200 | 1800 |
+| **total** | 890635 | 59348 | 89090 |
+| empty share | 50.1% | 50.1% | 50.1% |

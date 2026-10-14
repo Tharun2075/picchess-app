@@ -53,3 +53,14 @@
 - Pieces for synthetic renders are the vendored Chessnut SVGs (Apache-2.0) rasterised in headless Chrome (no cairo here); cm-chessboard's own set is not used.
 - "Use this grid" opens the editor with an empty board (recognition is tickets 06-08). `?scan=<relative url>&bottom=w&turn=w` auto-loads a same-origin image for the proof.
 - Sample image app/samples/sample-phone-green.png is fixture 005.
+
+## Ticket 06: screenshot dataset
+- Positions come from own code (random pseudo-legal playouts, sparse random endings, the start position). python-chess is not used at all, so there is no GPL dependency even for development. Playouts ignore check, castling and en passant.
+- Piece sets (data/SOURCES.md): Chessnut (Apache-2.0), plus sets drawn by own code: glyph (Apple Symbols chess glyphs), letters (Arial Bold on discs) for training; geo (own shapes, CC0) and serif (Times New Roman letters in rounded squares) held out. No CC-BY-SA or GPL set was needed. Font-derived images are local training data only and never enter app/. Only four-to-five sets exist: real coverage must come from data/real_screens/.
+- Held-out split changes themes AND piece sets together (4 themes, 2 sets). A separate val split keeps the training themes and sets, so a gap between val and heldout measures generalisation.
+- Tiles are cut from the saved (already compressed, blurred, scaled) image using the known board box, in FEN order, with orientation handled at slicing. Stored as 32x32 grey bytes in one file per split to avoid 1.3 million small files.
+- Empty cap: every piece tile kept; per board at most max(piece count, 8) empties, seeded. Result is 50.1% empty, below the 60% limit. Full 64-square labels remain in labels.csv.
+- Determinism: each board is seeded by "seed/split/index" so multiprocessing order does not matter; tests check byte-identical files.
+- Tests are Python unittest, called from node via tests/dataset.test.mjs; skipped (with reason) when .venv is missing so `npm test` still runs on a clean checkout.
+- data/ is ignored except data/real_screens/README.md, labels.csv header and data/SOURCES.md; real screenshots stay ignored.
+- No VLM or external API anywhere; the classifier trained later ships as ONNX in the browser.
