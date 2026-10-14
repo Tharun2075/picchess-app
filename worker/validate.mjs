@@ -60,9 +60,11 @@ export function validateShare(body) {
 }
 
 // ---- visit counters ----
+// sources are an allowlist too, so an attacker cannot mint unbounded counter keys (each is a KV write)
+const SOURCES = ["direct", "scan", "twitter", "x", "reddit", "bluesky", "hn", "hackernews", "facebook", "instagram", "github", "email", "producthunt", "linkedin", "youtube", "discord", "mastodon"];
 export const cleanSrc = (s) => {
   const t = String(s ?? "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 24);
-  return t || "direct";
+  return !t ? "direct" : SOURCES.includes(t) ? t : "other";
 };
 // paths are a tiny allowlist so /hit cannot create unbounded KV keys
 export const cleanPath = (p) => (["/", "scan"].includes(String(p ?? "")) ? String(p) : "other");

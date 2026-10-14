@@ -55,11 +55,11 @@ test("KV write failure gives 503, not a crash", async () => {
 });
 test("/hit batches: first hit writes, later ones within the hour are pending", async () => {
   const env = mk(); let writes = 0; const put = env.KV.put; env.KV.put = async (...a) => { writes++; return put(...a); };
-  const hit = (t) => handle(new Request("https://w.test/hit?src=x&p=/"), env, new Date(NOW.getTime() + t));
+  const hit = (t) => handle(new Request("https://w.test/hit?src=reddit&p=/"), env, new Date(NOW.getTime() + t));
   await hit(0); await hit(1000); await hit(2000);
-  assert.equal(writes, 1); assert.equal(env.KV.m.get("hit|2026-10-14|x|/"), "1");
+  assert.equal(writes, 1); assert.equal(env.KV.m.get("hit|2026-10-14|reddit|/"), "1");
   await hit(3700000); // next hour: flush the 2 pending + this one
-  assert.equal(env.KV.m.get("hit|2026-10-14|x|/"), "4");
+  assert.equal(env.KV.m.get("hit|2026-10-14|reddit|/"), "4");
 });
 test("/hit counts per day|src|path, /stats reports them, no cookies", async () => {
   const env = mk();

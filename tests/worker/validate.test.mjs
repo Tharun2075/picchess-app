@@ -34,8 +34,8 @@ test("bad enums, unknown key, bad corners, bad version", () => {
 });
 test("visit key sanitiser", () => {
   assert.equal(cleanSrc("Twitter"), "twitter");
-  assert.equal(cleanSrc("a b|c<script>"), "abcscript");
-  assert.equal(cleanSrc("x".repeat(60)).length, 24);
+  assert.equal(cleanSrc("a b|c<script>"), "other");
+  assert.equal(cleanSrc("x".repeat(60)), "other");
   assert.equal(cleanSrc(""), "direct");
   assert.equal(cleanSrc(null), "direct");
   assert.equal(cleanPath("scan|evil"), "other"); assert.equal(cleanPath("scan"), "scan");
