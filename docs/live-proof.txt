@@ -1,0 +1,23 @@
+live proof 2026-10-14T16:56:19Z https://picchess.pages.dev (deployment https://261f3fe0.picchess.pages.dev)
+== HEAD /engine/stockfish-19-lite-single.wasm
+HTTP/2 200 
+content-type: application/wasm
+cache-control: public, max-age=31536000, immutable
+content-security-policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+== HEAD /sw.js
+HTTP/2 200 
+content-type: application/javascript
+cache-control: no-cache
+content-security-policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+== HEAD /
+HTTP/2 200 
+content-type: text/html; charset=utf-8
+cache-control: no-cache
+content-security-policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+== browser checks (390x844)
+PASS renders board: {"sq":96,"pieces":32,"w":390,"h":844}
+PASS hints ON -> 3 arrows within 5s: 3 arrows after 0 ms; e4 | +0.3 | depth 19 | d4 | +0.2 | depth 19 | Nf3 | +0.2 | depth 19
+PASS two-tap move e2-e4: moves list: "1.e4"
+PASS PGN export: "[Event \"PicChess game\"]\n[Site \"PicChess\"]\n[Date \"2026.10.14\"]\n[Round \"-\"]\n[White \"?\"]\n[Black \"?\"]\n[Result \"*\"]\n\n1. e4 *\n"
+service worker controlling page: true
+PASS offline reload served by SW: {"sq":96,"pieces":32,"title":"PicChess"}
