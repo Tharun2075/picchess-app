@@ -4,7 +4,7 @@ predicted FEN: rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R   (read from 
 scan result FEN: rnbqkb1r/pp1ppppp/2p4n/8/3P4/2P4N/PP1NPPPP/R1BQKB1R
 squares wrong: 0 of 64
 flagged for the user to check: 4
-time to first result: 259 ms in page (model load 157 ms, read 53 ms); 503 ms wall incl. test overhead
+time to first result: 309 ms in page (model load 208 ms, read 51 ms); 504 ms wall incl. test overhead
 "Check the board" step visible: true; Play locked until confirmed: true
 horizontal overflow at 390 px: false
 console errors: none

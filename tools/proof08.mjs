@@ -22,6 +22,9 @@ try {
   await send("Runtime.enable"); await send("Log.enable"); await send("Page.enable"); await send("DOM.enable");
   await send("Network.enable"); await send("Network.setCacheDisabled", { cacheDisabled: true });
   await send("Emulation.setDeviceMetricsOverride", { width: 390, height: 844, deviceScaleFactor: 2, mobile: true });
+  await send("Page.navigate", { url: appUrl }); await sleep(1500);
+  // drop any service worker and caches left by an earlier run so the proof sees the files on disk
+  await js(`navigator.serviceWorker.getRegistrations().then(rs => Promise.all(rs.map(r => r.unregister()))).then(() => caches.keys()).then(ks => Promise.all(ks.map(k => caches.delete(k)))).then(() => 1)`);
   await send("Page.navigate", { url: appUrl }); await sleep(3000);
   await js(`document.getElementById('scan-open').click()`); await sleep(500);
   const root = (await send("DOM.getDocument")).result.root.nodeId;
