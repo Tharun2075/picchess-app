@@ -1,0 +1,16 @@
+Live proof 09: opt-in board sharing on https://picchess.pages.dev (deployment da353818)
+Date UTC: 2026-10-14 22:12 (run), checked 22:13-22:16. Browser: own-browser picchess-live09 (stopped afterwards), 390x844, SW + caches cleared, URL ?v=random.
+Script: /Users/thar/.claude/jobs/cdbed968/tmp/live09/proof-live09.mjs (copy of tools/proof09c.mjs, Worker NOT stubbed, no app code changed). Fixture tests/fixtures/held/02.png.
+
+PASS  consent tick box visible at 390 px before upload (docs/live-proof-09-390.png); ticked=true; scrollWidth 390 = innerWidth
+PASS  recognition on live site: FEN 5Q1q/7r/3Pk2p/3b1pp1/P4PP1/1p5K/3NPb1P/R4BR1 = truth.json 02.png
+PASS  "The board matches my picture" then "Play this position" -> toast "Shared, thank you" (docs/live-proof-09-toast.png)
+PASS  network: OPTIONS /share 204, then POST https://picchess-share.picchess.workers.dev/share -> 200; request body 41762 chars (about 31.3 KB of image, base64 inside JSON). Only one /share call. Also POST /hit?src=scan 204 (anonymous counter, no body).
+PASS  console / page errors: none (errors list empty)
+PASS  stored image: KV key img/29b78edf...52d0.jpg, 31150 bytes, JPEG 512 x 512 (square, inside 256..1024); matches request size (41762 * 3/4 = 31321 incl. JSON-safe base64 padding/fields)
+        sha256 of stored bytes = 29b78edfe0fc4192b836cafd2be57f9e245fab0ff5471c5e2d3f14eb936352d0 = the key/metadata sha
+PASS  metadata FEN = 5Q1q/7r/3Pk2p/3b1pp1/P4PP1/1p5K/3NPb1P/R4BR1 w - - 0 1 (placement equals truth.json for 02.png); predicted = corrected (no edits); source screenshot, orientation white, license CC0, no corners key, no full picture
+        Crop only: fixture 640 px board went out as a 512 px crop JPEG of ~31 KB; nothing else in the stored record.
+INFO  /stats before: {"days":{"2026-10-14":{"direct":4,"scan":2}},"totalScans":2}; after (immediately, again 1 min later): unchanged. The /hit counter is batched/approximate (README), so no increment seen; /hit returned 204. Not a share failure.
+DONE  canary key deleted afterwards with wrangler kv key delete; SHARES list is empty again.
+No commit, no push, no deploy, nothing posted.
