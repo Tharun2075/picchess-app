@@ -5,3 +5,12 @@ b) PASS click shows section with Upload image + Take picture, radios scan-bottom
 c) PASS no horizontal scroll: scrollWidth 390 = innerWidth 390 (before and after opening panel)
 d) PASS served HTML contains 'Scan image' on first load (curl count 3); service worker activated; no hard reload needed
 screens: docs/live-proof-05-390.png (panel open), docs/live-proof-05-desktop.png (1280x800)
+
+## Deploy 2: social card
+Date: 2026-10-14 (UTC ~19:32)
+Deployment: 57bdcd1b (https://57bdcd1b.picchess.pages.dev), from clean `git archive HEAD app`, branch main
+(a) PASS  GET https://picchess.pages.dev/?v=<rand> (Cache-Control: no-cache): contains "Scan image" and <meta property="og:image" content="https://picchess.pages.dev/social-card.png">
+(b) PASS  /social-card.png?x=<rand>: 200 image/png 123721 bytes (~124 KB), etag 4f661f5b...
+          Note: the first 2 requests right after deploy returned the HTML fallback (5918 bytes) from the edge; 3 later requests were all correct. Edge propagation lag.
+(c) PASS  /social-card-square.png: 200 image/png 136479 bytes
+Crawler: curl -A "Twitterbot/1.0" returns og:title PicChess, og:image https://picchess.pages.dev/social-card.png, twitter:card summary_large_image.
