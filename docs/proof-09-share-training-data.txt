@@ -1,0 +1,20 @@
+Proof 09: opt-in training data + visit counter (2026-10-14)
+
+STATUS OF LIVE STEPS: BLOCKED. `npx wrangler r2 bucket list` fails with
+  "Please enable R2 through the Cloudflare Dashboard. [code: 10042]"
+Enabling R2 needs the dashboard (Cloudflare asks for a payment method), which is forbidden here.
+So: no Worker deployed, no canary POST, no live /hit -> /stats check. Worker origin in app/lib/share.js and
+app/_headers is the placeholder https://picchess-share.REPLACE-SUBDOMAIN.workers.dev; deploy steps are in worker/README.md.
+The chair has not been touched: Pages not redeployed.
+
+DONE AND PROVEN LOCALLY
+- npm test: 113 pass, 0 fail (was 93). New: tests/worker/validate.test.mjs, tests/worker/handler.test.mjs
+  (fake R2/KV: 21st request = 429, daily cap = 503, duplicate sha overwrites, no Set-Cookie, /hit + /stats),
+  tests/share-client.test.mjs (fake fetch: POST only when ticked and confirmed; zero calls unticked/unconfirmed;
+  silent failure; utm_source beacon and strip; CSP origin matches SHARE_ORIGIN).
+- Unticked run request log (from the client test): fake fetch call count = 0 for unticked, for no confirmed context,
+  and for empty corrected FEN.
+- docs/proof-09-share-training-data.png: headless Chrome, 390 px window, Scan panel with the tick box (default off)
+  and the new sentence. (Headless Chrome lays out wider than 390, so the right edge is cropped in the picture.)
+- Decisions: only "Play this position" sends; "photo" = camera button, everything else "screenshot"; /hit paths are
+  an allowlist ("/", "scan", else "other") so keys stay bounded; KV limits are read-then-write (approximate).
