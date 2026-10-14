@@ -1,0 +1,7 @@
+live proof 2026-10-14T19:17:10Z https://picchess.pages.dev (deployment https://6f308c46.picchess.pages.dev), HEAD 35b36fd, tests 86/86 pass
+browser: private headless Chrome (own-browser picchess-deploy), cache disabled, 390x844 mobile, dpr 2
+a) PASS Scan image button in page HTML and visible at x=314,y=469 (67x47), same row as Start position (x=237,y=469)
+b) PASS click shows section with Upload image + Take picture, radios scan-bottom=w/b, scan-turn=w/b
+c) PASS no horizontal scroll: scrollWidth 390 = innerWidth 390 (before and after opening panel)
+d) PASS served HTML contains 'Scan image' on first load (curl count 3); service worker activated; no hard reload needed
+screens: docs/live-proof-05-390.png (panel open), docs/live-proof-05-desktop.png (1280x800)
