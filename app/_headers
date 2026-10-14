@@ -4,7 +4,7 @@
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; worker-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self' https://picchess-share.REPLACE-SUBDOMAIN.workers.dev; manifest-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
   # Only needed for a FUTURE multi-threaded Stockfish (SharedArrayBuffer needs cross-origin isolation).
   # The current single-threaded build does not need them; enabling them also blocks any cross-origin
   # resource that does not send CORP headers, so leave them off until the engine is swapped.

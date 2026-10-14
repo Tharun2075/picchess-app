@@ -5,6 +5,7 @@ import { Engine } from "./lib/engine.js";
 import * as P from "./lib/position.js";
 import { exportPgn, importText } from "./lib/pgn.js";
 import { initScan } from "./scan.js";
+import { shareBoard, isShareOn, countVisit } from "./lib/share.js";
 import { whiteScore, formatScore } from "./lib/uci.js";
 
 const $ = (id) => document.getElementById(id);
@@ -415,12 +416,22 @@ $("ed-play").addEventListener("click", () => {
   if (!v.ok) return renderEdit();
   const r = game.loadFen(P.toFen(edit)); // only here is the running game replaced
   if (!r.ok) { $("ed-errors").replaceChildren(Object.assign(document.createElement("li"), { textContent: r.error })); return; }
+  if (scanned && isShareOn()) { // confirmed position + opted in: share once, silently on failure
+    const predictedFen = scanned.fen, correctedFen = P.toFen(edit), orientation = iPlay;
+    scan.shareContext().then((c) => c && shareBoard({ ctx: { ...c, predictedFen }, correctedFen, orientation, enabled: isShareOn(), onDone: toast })).catch(() => {});
+  }
   game.orientation = iPlay;
   leaveEdit();
   $("fen-error").textContent = "";
   render(false);
 });
 window.__picchess.editor = { get edit() { return edit; }, get editing() { return editing; } };
+
+function toast() {
+  const t = $("toast"); t.textContent = "Shared, thank you"; t.hidden = false;
+  setTimeout(() => { t.hidden = true; }, 3000);
+}
+countVisit();
 
 // ---- Scan image (ticket 05): input + grid finding; recognition comes later ----
 const SCAN_HIDE = ["play-row", "hints", "fen-form", "moves", "board-wrap", "banner"];
