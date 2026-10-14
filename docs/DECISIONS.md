@@ -82,3 +82,10 @@
 - "Check the board" is always shown after a read: the board editor opens prefilled, unsure squares are outlined, and Play stays locked until the user confirms. Unseen piece art is about 90% per square, so a silent result would be wrong.
 - Bottom colour is guessed from pawn/king positions and can be switched in the editor.
 - Proof: real browser at 390 px, held-out fixture 01 (totoy, purple, Black at bottom): 0 of 64 wrong, see docs/proof-08-screenshot-to-fen.txt. tools/serve.mjs is a static server with correct MIME types; tools/proof08.mjs drives the proof.
+
+## 2026-10-15: shared board images in Workers KV, not R2
+- R2 needs a card on file; the zero-spend rule forbids it. Images go in a second KV namespace (SHARES) with bytes as the value and the JSON record (fen, kind, bottom colour, ts, licence CC0) as KV metadata.
+- Daily cap 900 shares; each share costs about 3 KV writes, so the real ceiling on the free 1000 writes/day is about 330 shares/day. Over cap returns 503 and the app just skips sharing.
+- /hit counters are batched per isolate (first hit per key writes at once, the rest flush at most hourly). /stats is cached 60 s and KV list lags ~60 s.
+- /hit source is an allowlist (else "other") so callers cannot create unbounded keys.
+- Worker lives at https://picchess-share.picchess.workers.dev (workers.dev subdomain "picchess" registered on the existing Cloudflare login, free).

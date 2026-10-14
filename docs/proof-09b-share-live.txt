@@ -1,0 +1,28 @@
+Proof 09b: share Worker live on workers.dev, KV only (2026-10-14)
+
+Origin: https://picchess-share.picchess.workers.dev   (workers.dev subdomain "picchess" registered free via the Cloudflare API on the existing login)
+Account: the one `npx wrangler whoami` shows (6e485ca1c5e455471c967b205a956c6f). Bindings: KV 8c1e74140de645c18f7fdbc7e0c57821 (counters), SHARES 038eeaacc4824daba426cdd6cac7789c (images). No R2, no DO, no card.
+
+CANARY SHARE (from this Mac; tests/fixtures/held/00.png converted to jpeg with sips, because the Worker only accepts jpeg/webp like the app's encoder produces)
+  request : POST /share  {image: base64 of canary.jpg, source:"screenshot", orientation:"white", sideToMove:"w", predictedFen:"",
+            correctedFen:"2n1n3/B1p1R1p1/k3B3/1b1n4/BP1B4/1R3K2/pqp3RP/2nN4 w - - 0 1", corners:null, appVersion:"0.1"}
+  response: HTTP 200 {"ok":true,"sha":"2926edd34cb210fa85a35e827d4e4146654ff578224ba61d350c9e5fa8efd7c2"}
+  sha256 of the file sent                    : 2926edd34cb210fa85a35e827d4e4146654ff578224ba61d350c9e5fa8efd7c2
+  sha256 of `wrangler kv key get` (--remote) : 2926edd34cb210fa85a35e827d4e4146654ff578224ba61d350c9e5fa8efd7c2   cmp: IDENTICAL
+  metadata read via `wrangler kv key list`: kind=screenshot bottom=white sideToMove=w fen=2n1n3/... w - - 0 1 license=CC0 ts=2026-10-14T22:00:16.135Z (corners null)
+  cleanup : the canary key img/2926edd3...d7c2.jpg was DELETED afterwards; SHARES is empty again (list returns []).
+
+VISIT COUNTER
+  GET /hit?src=direct&p=%2F -> HTTP 204
+  KV key hit|2026-10-14|direct|/ read with wrangler = 1 (it did not exist before; /stats before = {"days":{},"totalScans":0})
+  GET /stats -> {"days":{"2026-10-14":{"direct":1}},"totalScans":0}   => moved by exactly 1
+  Note: /stats uses KV list, which lags up to ~60 s after a write, and is cached 60 s; early reads showed the empty answer.
+
+DEPLOY NOTES / FIXES THIS SESSION
+  - /hit src is now an allowlist (else "other") so nobody can mint unbounded counter keys (each is a KV write).
+  - /hit is batched per isolate (first hit writes, later ones at most hourly): counts are approximate.
+  - npm test: 115 pass, 0 fail.
+
+390 px proof (2026-10-15): docs/proof-09b-optin-390.png (tick box) and docs/proof-09b-toast-390.png ("Shared, thank you").
+Page fetch to workers.dev was stubbed, so nothing extra reached the live Worker. scrollWidth 390 = innerWidth 390, no right-edge overflow, no console errors.
+Pages was NOT deployed; the chair redeploys.
