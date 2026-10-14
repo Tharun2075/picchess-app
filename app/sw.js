@@ -2,7 +2,7 @@
 // The recogniser files (onnxruntime-web wasm, the model: LAZY_PREFIXES) go into a second cache that fills the first time a scan runs.
 // The block between the markers is rewritten by `node tools/stamp-sw.mjs`; tests/sw.test.mjs fails if it is stale.
 // BEGIN GENERATED
-const VERSION = "63d3c6ba399e";
+const VERSION = "28934eae47c9";
 const ML_VERSION = "1e302798d00f";
 const LAZY_PREFIXES = ["./vendor/onnxruntime-web/","./models/"];
 const PRECACHE = [

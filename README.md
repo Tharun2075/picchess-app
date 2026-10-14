@@ -173,9 +173,9 @@ A 1.3 MB ONNX classifier (app/models/squares-screen.onnx + .json) that labels ea
 
 ## Open dataset
 
-PicChess can collect boards as free training data. It is **opt-in**: a tick box on the Scan panel, default off, text "Help improve PicChess: share this board and my corrections as free, public training data". Unticked, the app makes no share request at all.
+PicChess can collect boards as free training data. It is **opt-in**: a tick box on the Scan panel, default off, text "Help improve PicChess: only the cropped, straightened board (no other part of your picture) is shared, with the position, as public domain (CC0) training data". Unticked, the app makes no share request at all.
 
-- What is collected (only after you tick and confirm the position with "Play this position"): the picture (re-encoded to JPEG under 1 MB), whether it was a screenshot or a camera photo, which colour is at the bottom, side to move, the position the model guessed, the position you confirmed (your corrections are the labels), the four board corners (camera photos only), the app version, and the UTC date received. No IP, no account, no cookies. The IP is used only as a salted, hourly-rotating hash for a 20-per-hour limit.
+- What is collected (only after you tick and confirm the position with "Play this position"): ONLY the cropped, straightened board (512 px square JPEG, under 250 KB; nothing outside the board quad and no corner numbers leave the device), whether it was a screenshot or a camera photo, which colour is at the bottom, side to move, the position the model guessed, the position you confirmed (your corrections are the labels), the app version, and the UTC date received. No IP, no account, no cookies. The IP is used only as a salted, hourly-rotating hash for a 20-per-hour share limit (and 60 per hour for visit counts).
 - Intent: CC0 / public domain. Publishing happens later and only manually; nothing is published automatically.
 - Opt out: email business@thatched.ai with the sha of your sample and it is deleted.
 - We count visits per day and source, nothing else.

@@ -158,7 +158,7 @@ export function initScan({ onOpen, onClose, onUseGrid }) {
     // only the warped, straightened board leaves the device: nothing outside the corner quad, and no corner numbers
     const board = warpQuad(st.img, st.corners, 512);
     const c = document.createElement("canvas"); c.width = board.width; c.height = board.height;
-    c.getContext("2d").putImageData(board, 0, 0);
+    c.getContext("2d").putImageData(new ImageData(new Uint8ClampedArray(board.data), board.width, board.height), 0, 0);
     const image = await encodeJpeg(c, 250 * 1024);
     return { image, source: st.source };
   }

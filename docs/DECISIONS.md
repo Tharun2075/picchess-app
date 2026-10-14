@@ -89,3 +89,11 @@
 - /hit counters are batched per isolate (first hit per key writes at once, the rest flush at most hourly). /stats is cached 60 s and KV list lags ~60 s.
 - /hit source is an allowlist (else "other") so callers cannot create unbounded keys.
 - Worker lives at https://picchess-share.picchess.workers.dev (workers.dev subdomain "picchess" registered on the existing Cloudflare login, free).
+
+## 2026-10-15: share only the board, never the picture (ticket 030 follow-up)
+- Security review: the full picture can carry usernames and chat text and the dataset is public (CC0). Owner decision: share only the board.
+- shareContext() warps the confirmed corner quad to a 512 px square (warpQuad) and sends that as JPEG; the raw picture and the corner numbers never leave the device. The `corners` field is gone from the record, and the Worker rejects it as an unknown key.
+- Worker (validate.mjs) reads the JPEG start-of-frame header and accepts only square images 256..1024 px, jpeg only (webp dropped); MAX_IMAGE 250 KB, MAX_BODY 400 KB. A screenshot-size picture gets 400.
+- /hit now has the same salted hourly per-IP hash as /share, limit 60/hour. Decision: the counter lives in isolate memory, so an over-limit caller causes no KV write (free-tier write budget) and under the limit there is no extra KV read. It is approximate across isolates, which is fine for a visit counter. /stats does one list call per day with limit 1000 and reads at most 1000 keys in total.
+- Bug found by the 390 px proof: warpQuad returns a plain object, not ImageData; wrapped with new ImageData() before putImageData. Unit tests cannot see it (browser only), the proof run did.
+- Proof: docs/proof-09c-board-only.txt, docs/proof-09c-board-only-390.png.
