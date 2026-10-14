@@ -1,0 +1,26 @@
+Proof 09c: board-only sharing (2026-10-15)
+
+Fixture: a 414 x 896 phone screenshot, 390 px wide browser (own-browser picchess-09c, local server).
+The page's fetch to the Worker was STUBBED for the payload capture (tools/proof09c.mjs); only the canary below touched the live Worker.
+
+PAYLOAD the app built after ticking "Help improve PicChess":
+  POST /share calls: 1
+  keys: image, source, orientation, sideToMove, predictedFen, correctedFen, appVersion   (no corners, no full picture)
+  image decoded size: 512 x 512 (board crop; source screenshot was 414 x 896)
+  image base64 length: 45968
+  other fields: {"source": "screenshot", "orientation": "white", "sideToMove": "w", "predictedFen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4", "correctedFen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4 w - - 0 1", "appVersion": "0.1"}
+  scrollWidth 390 = innerWidth 390; page error: ''
+  Screenshot with consent text: docs/proof-09c-board-only-390.png; the crop itself: docs/proof-09c-board-crop.jpg
+
+LIVE WORKER CANARY (Worker version c9af2011-ac74-4ba6-8506-11c217a3db12, tools/canary09c.mjs, sends the captured crop):
+POST /share -> 200 {"ok":true,"sha":"46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4"} 
+sha256 sent: 46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4 bytes: 34475
+sha256 read back: 46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4 IDENTICAL
+metadata: [ { "name": "img/46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4.jpg", "metadata": { "sha": "46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4", "source": "screenshot", "orientation": "white", "sideToMove": "w", "predictedFen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4", "correctedFen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4 w - - 0 1", "appVersion": "0.1", "kind": "screenshot", "bottom": "white", "fen": "1N3k2/5PpP/QR2r3/1P1q4/1K6/B1rB1r2/2n1P3/1N1Q4 w - - 0 1", "license": "CC0", "ts": "2026-10-14T22:08:30.410Z", "receivedAt": "2026-10-14" } } ] 
+deleted; list now: []
+NEG corners key -> 400 {"error":"unknown key corners"}
+NEG full screenshot 414x896 jpeg -> 400 {"error":"image must be the square board crop (256..1024 px)"}
+
+sha256 of docs/proof-09c-board-crop.jpg = 46f54d540d88729776918d25bc48bc2cd7df4bb9dbc2bce54d615bd34efebce4 (512 x 512). Canary key deleted afterwards.
+
+npm test: 117 pass, 0 fail. Pages NOT deployed.
