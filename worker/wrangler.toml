@@ -3,11 +3,12 @@ main = "index.mjs"
 compatibility_date = "2026-10-01"
 workers_dev = true
 
-[[r2_buckets]]
-binding = "BUCKET"
-bucket_name = "picchess-share"
-
-# Create with: npx wrangler kv namespace create picchess-share-kv  (then paste the id here)
+# Counters and rate limits (small values)
 [[kv_namespaces]]
 binding = "KV"
-id = "REPLACE_WITH_KV_ID"
+id = "8c1e74140de645c18f7fdbc7e0c57821"
+
+# Shared board images (value = image bytes, KV metadata = the JSON record)
+[[kv_namespaces]]
+binding = "SHARES"
+id = "038eeaacc4824daba426cdd6cac7789c"

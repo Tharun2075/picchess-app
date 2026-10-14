@@ -1,8 +1,9 @@
 // PicChess share Worker: POST /share (opt-in training data), /hit and /stats (visit counts only).
-// No cookies, no accounts, no raw IPs, no content in logs. Free plan: one R2 bucket + one KV namespace.
+// No cookies, no accounts, no raw IPs, no content in logs. Free plan: two KV namespaces (KV = counters, SHARES = images), no R2.
 import { MAX_BODY, validateShare, corsOrigin, hitKey, cleanSrc, cleanPath } from "./validate.mjs";
 
-const RATE_PER_HOUR = 20, DAILY_CAP = 5000;
+const RATE_PER_HOUR = 20, DAILY_CAP = 900; // KV free tier allows 1000 writes/day in total; /hit batching keeps the rest small
+const HIT_FLUSH_MS = 3600000;
 const utcDay = (d = new Date()) => d.toISOString().slice(0, 10);
 const sha256hex = async (data) => [...new Uint8Array(await crypto.subtle.digest("SHA-256", data))].map((b) => b.toString(16).padStart(2, "0")).join("");
 const counts = { accepted: 0, rejected: 0 };
@@ -44,21 +45,37 @@ async function share(req, env, now) {
   const v = validateShare(body);
   if (!v.ok) return reject(req, v.status, v.error);
 
-  await env.KV.put(ipKey, String(used + 1), { expirationTtl: 7200 });
   const sha = await sha256hex(v.bytes);
-  const imgKey = `images/${sha}.${v.ext}`, metaKey = `meta/${sha}.json`;
-  const isNew = !(await env.BUCKET.head(metaKey));
-  await env.BUCKET.put(imgKey, v.bytes, { httpMetadata: { contentType: v.ext === "jpg" ? "image/jpeg" : "image/webp" } });
-  await env.BUCKET.put(metaKey, JSON.stringify({ sha, ...v.value, imageKey: imgKey, receivedAt: utcDay(now) }), { httpMetadata: { contentType: "application/json" } });
-  if (isNew) await bump(env.KV, capKey, 2 * 86400);
+  const key = `img/${sha}.${v.ext}`;
+  // one KV entry per share: the image bytes, with the small JSON record as KV metadata (limit 1 KB)
+  const meta = { sha, ...v.value, kind: v.value.source, bottom: v.value.orientation, fen: v.value.correctedFen, license: "CC0", ts: now.toISOString(), receivedAt: utcDay(now) };
+  try {
+    const isNew = !(await env.SHARES.getWithMetadata(key, "arrayBuffer")).metadata;
+    await env.KV.put(ipKey, String(used + 1), { expirationTtl: 7200 });
+    await env.SHARES.put(key, v.bytes, { metadata: meta });
+    if (isNew) await bump(env.KV, capKey, 2 * 86400);
+  } catch { return reject(req, 503, "try later"); } // e.g. KV daily write limit reached
   counts.accepted++;
   console.log(`share accepted=${counts.accepted} rejected=${counts.rejected}`);
   return reply(req, 200, { ok: true, sha });
 }
 
+// Counts are batched per isolate: the first hit of a key writes at once, later hits are added to the
+// pending total and flushed at most once per hour per key. Approximate by design (free KV write budget).
+const hitState = new WeakMap();
 async function hit(req, env, url, now) {
   const src = cleanSrc(url.searchParams.get("src")), p = cleanPath(url.searchParams.get("p"));
-  await bump(env.KV, hitKey(utcDay(now), src, p), 40 * 86400);
+  const key = hitKey(utcDay(now), src, p);
+  let st = hitState.get(env.KV); if (!st) hitState.set(env.KV, st = new Map());
+  const e = st.get(key) || { pending: 0, last: 0 };
+  e.pending++; st.set(key, e);
+  if (now.getTime() - e.last >= HIT_FLUSH_MS) {
+    const add = e.pending; e.pending = 0; e.last = now.getTime();
+    try {
+      const n = parseInt((await env.KV.get(key)) || "0", 10) + add;
+      await env.KV.put(key, String(n), { expirationTtl: 40 * 86400 });
+    } catch { e.pending += add; }
+  }
   return new Response(null, { status: 204, headers: { "cache-control": "no-store", "access-control-allow-origin": corsOrigin(req.headers.get("origin")) || "*" } });
 }
 

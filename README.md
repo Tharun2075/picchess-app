@@ -179,6 +179,6 @@ PicChess can collect boards as free training data. It is **opt-in**: a tick box 
 - Intent: CC0 / public domain. Publishing happens later and only manually; nothing is published automatically.
 - Opt out: email business@thatched.ai with the sha of your sample and it is deleted.
 - We count visits per day and source, nothing else.
-- Export for training: `node tools/export-dataset.mjs` writes `data/share-manifest.jsonl` (gitignored). Put the shas from `npx wrangler r2 object` listings in `data/share-shas.txt` first (the free plan has no list command).
+- Export for training: `node tools/export-dataset.mjs` writes `data/shares/` (images + `manifest.jsonl`, gitignored), read straight from the SHARES KV namespace with wrangler. Canary entries are skipped.
 
 Decisions: "screenshot" = picture uploaded, pasted or dropped; "photo" = taken with the camera button. Only the confirmation at "Play this position" sends (the correction is not known earlier). The Worker lives in `worker/` (see `worker/README.md`).

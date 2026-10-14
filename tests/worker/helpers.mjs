@@ -6,8 +6,8 @@ export function fakeKV() {
   const m = new Map();
   return { m, get: async (k) => m.get(k) ?? null, put: async (k, v) => { m.set(k, String(v)); }, list: async ({ prefix }) => ({ keys: [...m.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })) }) };
 }
-export function fakeR2() {
+export function fakeShares() {
   const m = new Map();
-  return { m, head: async (k) => (m.has(k) ? {} : null), put: async (k, v) => { m.set(k, v); } };
+  return { m, getWithMetadata: async (k) => ({ value: m.get(k)?.v ?? null, metadata: m.get(k)?.metadata ?? null }), put: async (k, v, o = {}) => { m.set(k, { v, metadata: o.metadata ?? null }); } };
 }
 export const post = (body, headers = {}) => new Request("https://w.test/share", { method: "POST", headers: { "content-type": "application/json", "cf-connecting-ip": "1.2.3.4", ...headers }, body: typeof body === "string" ? body : JSON.stringify(body) });
