@@ -1,0 +1,7 @@
+proof-03 board editor
+RESULT: PASS
+game before editing: {"fen":"rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2","hist":["e4","e5"]}
+during editing: {"fen":"rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq - 0 2","hist":["e4","e5"],"editFen":"2bqk3/3p4/8/4p3/4P3/8/5P2/R3K3 b - - 0 1","errors":"","castling":["K:off/disabled","Q:off","k:off/disabled","q:off/disabled"]}
+game untouched while editing: true
+error shown after adding second white king: "White needs exactly one king (found 2)." Play disabled=true
+after Play: {"fen":"2bqk3/3p4/8/4p3/4P3/8/5P2/R3K3 b - - 0 1","hist":[],"orientation":"b","banner":"Black to move.","hints":"Qb6\n-9.3\ndepth 18\nBb7\n-8.7\ndepth 17\nQh4\n-8.6\ndepth 17","arrows":3,"editing":false}

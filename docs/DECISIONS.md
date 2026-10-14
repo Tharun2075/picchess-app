@@ -22,3 +22,14 @@
 - If the worker or WASM fails: "Engine unavailable" is shown and the board stays playable.
 - Arrows: best move strongest green, then amber, then grey; drawn in our own SVG overlay (cm-chessboard's arrows extension was trimmed in ticket 01).
 - Proof: tools/proof02.mjs drives a headless Chrome over CDP; output in docs/proof-02-stockfish-top3.txt/.png.
+
+## Ticket 03: board editor
+- The editor holds its own position copy; `game` is replaced only by "Play this position" (which resets history to the new start). Cancel discards the copy.
+- Model in app/lib/position.js is immutable: every function returns a new object. Board is a 64-array in FEN order.
+- Castling: rights are auto-removed when king/rook leave their home squares and never auto-ticked; the user ticks them. toFen re-checks, so an impossible right cannot reach the FEN.
+- En passant: offered only if the side to move has a pawn that can capture there and the squares behind are empty.
+- Validation also rejects more than 8 pawns per side (not required, but impossible).
+- Tools: "Drag" (cm-chessboard move input, any piece anywhere), a piece or eraser (square-select tap). Tapping a square already holding the selected piece removes it.
+- "I play" sets only the board orientation; it is not part of the FEN.
+- Halfmove/fullmove counters are not edited: written as 0 and 1.
+- Proof: tools/proof03.mjs (CDP, own-browser) -> docs/proof-03-board-editor.txt/.png (+ -editing.png). Drag itself was not automated.

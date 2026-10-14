@@ -18,11 +18,41 @@
     <svg id="arrows" viewBox="0 0 8 8" aria-hidden="true"></svg>
     <div id="promo" hidden role="dialog" aria-label="Choose promotion piece"></div>
   </div>
-  <div class="row">
+  <div class="row" id="play-row">
+    <button id="edit" type="button">Edit position</button>
     <button id="undo" type="button">Undo</button>
     <button id="flip" type="button">Flip board</button>
     <button id="start" type="button">Start position</button>
   </div>
+  <section id="editor" aria-label="Board editor" hidden>
+    <div id="palette" role="toolbar" aria-label="Piece palette"></div>
+    <div class="row">
+      <button id="ed-clear" type="button">Clear</button>
+      <button id="ed-start" type="button">Start position</button>
+    </div>
+    <fieldset><legend>Side to move</legend>
+      <label><input type="radio" name="turn" value="w" checked> White</label>
+      <label><input type="radio" name="turn" value="b"> Black</label>
+    </fieldset>
+    <fieldset><legend>I play</legend>
+      <label><input type="radio" name="iplay" value="w" checked> White</label>
+      <label><input type="radio" name="iplay" value="b"> Black</label>
+    </fieldset>
+    <fieldset><legend>Castling</legend>
+      <label><input type="checkbox" class="castle" value="K"> White O-O</label>
+      <label><input type="checkbox" class="castle" value="Q"> White O-O-O</label>
+      <label><input type="checkbox" class="castle" value="k"> Black O-O</label>
+      <label><input type="checkbox" class="castle" value="q"> Black O-O-O</label>
+    </fieldset>
+    <label class="ep">En passant square <select id="ep"></select></label>
+    <label for="ed-fen">FEN</label>
+    <div class="fenrow"><input id="ed-fen" readonly spellcheck="false"><button id="ed-copy" type="button">Copy</button></div>
+    <ul id="ed-errors" role="alert"></ul>
+    <div class="row">
+      <button id="ed-cancel" type="button" class="secondary">Cancel</button>
+      <button id="ed-play" type="button">Play this position</button>
+    </div>
+  </section>
   <section id="hints" aria-label="Engine hints">
     <label class="toggle"><input type="checkbox" id="hints-toggle"> Engine hints</label>
     <div id="hints-status" role="status" aria-live="polite"></div>

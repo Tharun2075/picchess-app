@@ -22,6 +22,14 @@ Plain web page, no build step, no server, nothing leaves the browser.
 - Switch off and no search runs at all.
 - Stockfish 19.0.1 lite (GPLv3, unmodified, in app/engine/, source link in app/engine/SOURCE.md). If it cannot load, the page says "Engine unavailable" and the board still works.
 
+## What works (ticket 03)
+- "Edit position" opens the board editor on a copy of the current position: piece palette (12 pieces + eraser), tap a square to place (tap the same piece again to remove), "Drag" tool to move pieces, "Clear", "Start position".
+- Inputs: side to move, "I play" (board flips so your side is at the bottom), castling boxes (greyed out and unticked when king/rook are off their home squares), en passant dropdown (only squares that could really exist).
+- Live FEN with a Copy button.
+- "Play this position" is disabled with plain-language errors until: one king each, no pawns on rank 1/8, side not to move not in check, at most 16 pieces (and 8 pawns) per side.
+- The running game and its move list are untouched until "Play this position"; Cancel throws the edit away.
+- Pure model in app/lib/position.js (setPiece, movePiece, toFen, validate, inferCastling, legalEpSquares).
+
 ## Run
 ```
 cd app && python3 -m http.server 8000 --bind 127.0.0.1
@@ -33,14 +41,15 @@ Must be served over http (ES modules do not load from file://).
 ```
 npm test
 ```
-Runs `node --test tests/` (36 tests: game rules, UCI parsing on recorded Stockfish lines, engine on/off with a stub worker).
+Runs `node --test tests/` (game rules, editor model in tests/position.test.mjs, UCI parsing on recorded Stockfish lines, engine on/off with a stub worker).
 
 ## Layout
 - app/index.html, main.js, style.css: the page
 - app/lib/game.js: pure game module (no DOM) wrapping chess.js
+- app/lib/position.js: pure board-editor model
 - app/lib/uci.js, engine.js: UCI parsing and the Stockfish worker wrapper
 - app/engine/: Stockfish files, COPYING, SOURCE.md
-- tools/proof02.mjs: proof driver
+- tools/proof02.mjs, proof03.mjs: proof drivers
 - app/vendor/: chess.js, cm-chessboard, Chessnut pieces, each with its LICENSE (see app/vendor/README.md)
 - docs/: proof screenshot (docs/screenshot.png), DECISIONS.md
 
@@ -53,5 +62,10 @@ Runs `node --test tests/` (36 tests: game rules, UCI parsing on recorded Stockfi
 - The proof screenshot shows the FEN loaded via `?fen=`; drag and tap-tap were checked by logic tests of game.js, not by an automated browser run. Test them on a real phone.
 - Minimal English-only UI. Mobile Safari not tested here.
 
+- Editor: dragging pieces is wired to the same model as tapping but only tap-placing was driven in the automated browser run (docs/proof-03-board-editor.txt); try drag on a real phone. No FEN import into the editor (paste into "Paste a FEN", then Edit). Move counters are reset to 0 / 1 on Play.
+
 ## Decisions made headlessly (ticket 02)
 See docs/DECISIONS.md: lite single-threaded build (no special server headers), MultiPV 3 with 1.5 s per position, eval shown from White's side, hints default on.
+
+## Decisions made headlessly (ticket 03)
+See docs/DECISIONS.md: editor works on a copy, castling rights only ever auto-removed (never auto-ticked), en passant limited to legal squares.

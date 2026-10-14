@@ -32,3 +32,20 @@ textarea { width: 100%; font: 14px ui-monospace, monospace; padding: 8px; border
 #hints-list .san { flex: 0 0 5em; font-weight: 700; }
 #hints-list .ev { flex: 0 0 4em; }
 #hints-list .dp { color: #999; }
+
+#editor[hidden], #play-row[hidden], #hints[hidden], #fen-form[hidden], #moves[hidden] { display: none; }
+#palette { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin: 8px 0; }
+#palette button { min-height: 44px; padding: 2px; background: #f0d9b5; }
+#palette button[aria-pressed="true"] { outline: 3px solid #4b7bb5; background: #cfe0f5; }
+#palette svg { width: 100%; height: 100%; max-height: 40px; }
+#palette .txt { color: #222; font-weight: 700; font-size: .8rem; }
+#editor fieldset { border: 1px solid #555; border-radius: 6px; margin: 8px 0; display: flex; flex-wrap: wrap; gap: 6px 16px; }
+#editor fieldset label, .ep { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; }
+#editor input[type=radio], #editor input[type=checkbox] { width: 20px; height: 20px; }
+#editor select { min-height: 36px; font: inherit; }
+#editor input:disabled + * { opacity: .5; }
+.fenrow { display: flex; gap: 6px; }
+.fenrow input { flex: 1; min-width: 0; font: 13px ui-monospace, monospace; padding: 8px; border-radius: 6px; border: 1px solid #555; background: #1c1b19; color: #eee; }
+.fenrow button { flex: 0 0 72px; }
+#ed-errors { color: #ff8a80; margin: 6px 0; padding-left: 18px; min-height: 1.2em; }
+button.secondary { background: #5b5853; }

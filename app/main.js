@@ -1,7 +1,8 @@
-import { Chessboard, COLOR, INPUT_EVENT_TYPE } from "./vendor/cm-chessboard/src/Chessboard.js";
+import { Chessboard, COLOR, INPUT_EVENT_TYPE, POINTER_EVENTS } from "./vendor/cm-chessboard/src/Chessboard.js";
 import { Markers, MARKER_TYPE } from "./vendor/cm-chessboard/src/extensions/markers/Markers.js";
 import { Game, START_FEN } from "./lib/game.js";
 import { Engine } from "./lib/engine.js";
+import * as P from "./lib/position.js";
 import { whiteScore, formatScore } from "./lib/uci.js";
 
 const $ = (id) => document.getElementById(id);
@@ -75,6 +76,7 @@ function showPromo(from, to) {
 }
 
 function render(animated = false) {
+  if (editing) return;
   $("promo").hidden = true;
   promoPending = null;
   board.removeMarkers();
@@ -219,6 +221,132 @@ $("start").addEventListener("click", () => {
 $("flip").addEventListener("click", () => { game.flip(); render(false); });
 $("undo").addEventListener("click", () => { game.undo(); render(false); });
 
+// ---- Board editor ----
+// The editor works on its own copy (`edit`). `game` is only replaced when "Play this position" succeeds.
+let editing = false, edit = null, iPlay = "w", tool = "move";
+const pieceSvg = (letter, cls = "") => {
+  const key = (letter === letter.toUpperCase() ? "w" : "b") + letter.toLowerCase();
+  return `<svg viewBox="0 0 40 40"><g transform="scale(0.05)">${(PIECE_SVG[key] || "").replace(/^<g[^>]*>|<\/g>$/g, "")}</g></svg>`;
+};
+
+function buildPalette() {
+  const box = $("palette");
+  box.replaceChildren();
+  const add = (id, label, html) => {
+    const b = document.createElement("button");
+    b.type = "button"; b.dataset.tool = id; b.setAttribute("aria-label", label); b.innerHTML = html;
+    b.addEventListener("click", () => setTool(id));
+    box.appendChild(b);
+  };
+  add("move", "Move pieces by dragging", '<span class="txt">Drag</span>');
+  for (const p of P.PIECES) add(p, `${p === p.toUpperCase() ? "White" : "Black"} ${{ k: "king", q: "queen", r: "rook", b: "bishop", n: "knight", p: "pawn" }[p.toLowerCase()]}`, pieceSvg(p));
+  add("erase", "Eraser", '<span class="txt">Erase</span>');
+}
+
+function setTool(t) {
+  tool = t;
+  for (const b of $("palette").children) b.setAttribute("aria-pressed", String(b.dataset.tool === t));
+  board.disableMoveInput();
+  if (board.isSquareSelectEnabled()) board.disableSquareSelect(POINTER_EVENTS.pointerdown);
+  if (!editing) return;
+  if (t === "move") {
+    board.enableMoveInput((e) => {
+      if (e.type === INPUT_EVENT_TYPE.moveInputStarted) return !!e.piece;
+      if (e.type === INPUT_EVENT_TYPE.validateMoveInput) {
+        if (e.squareFrom !== e.squareTo) { edit = P.movePiece(edit, e.squareFrom, e.squareTo); setTimeout(renderEdit, 0); }
+        return false;
+      }
+    });
+  } else {
+    board.enableSquareSelect(POINTER_EVENTS.pointerdown, (e) => {
+      if (!e.square) return;
+      const want = t === "erase" ? null : t;
+      edit = P.setPiece(edit, e.square, edit.board[P.idx(e.square)] === want ? null : want); // tap the same piece again to remove it
+      renderEdit();
+    });
+  }
+}
+
+let editSeq = 0;
+async function renderEdit() {
+  const seq = ++editSeq;
+  const fen = P.toFen(edit);
+  $("ed-fen").value = fen;
+  document.querySelector(`input[name=turn][value=${edit.turn}]`).checked = true;
+  document.querySelector(`input[name=iplay][value=${iPlay}]`).checked = true;
+  const possible = P.inferCastling(edit.board);
+  for (const cb of document.querySelectorAll(".castle")) {
+    cb.disabled = !possible.includes(cb.value);
+    cb.checked = edit.castling.includes(cb.value);
+  }
+  const ep = $("ep");
+  ep.replaceChildren(new Option("none", "-"));
+  for (const sq of P.legalEpSquares(edit)) ep.add(new Option(sq, sq));
+  ep.value = edit.ep;
+  const v = P.validate(edit);
+  const errs = $("ed-errors");
+  errs.replaceChildren(...v.errors.map((t) => Object.assign(document.createElement("li"), { textContent: t })));
+  $("ed-play").disabled = !v.ok;
+  const banner = $("banner");
+  banner.className = "";
+  banner.textContent = `Editing: ${edit.turn === "w" ? "White" : "Black"} to move, you play ${iPlay === "w" ? "White" : "Black"}.`;
+  // board last: these calls are async, and the panel above must already be current
+  board.removeMarkers();
+  await board.setPosition(P.toFen(edit).split(" ")[0], false);
+  if (seq === editSeq && editing) await board.setOrientation(iPlay === "w" ? COLOR.white : COLOR.black);
+}
+
+function enterEdit() {
+  engine.stop();
+  board.disableMoveInput();
+  board.removeMarkers();
+  drawArrows([], false);
+  $("promo").hidden = true;
+  edit = P.parseFen(game.fen).position;
+  iPlay = game.orientation;
+  editing = true;
+  for (const id of ["play-row", "hints", "fen-form", "moves"]) $(id).hidden = true;
+  $("editor").hidden = false;
+  setTool("move");
+  renderEdit();
+}
+
+function leaveEdit() {
+  editing = false;
+  board.disableMoveInput();
+  if (board.isSquareSelectEnabled()) board.disableSquareSelect(POINTER_EVENTS.pointerdown);
+  $("editor").hidden = true;
+  for (const id of ["play-row", "hints", "fen-form", "moves"]) $(id).hidden = false;
+}
+
+function setEdit(next) { edit = next; renderEdit(); }
+
+$("edit").addEventListener("click", enterEdit);
+$("ed-cancel").addEventListener("click", () => { leaveEdit(); render(false); });
+$("ed-clear").addEventListener("click", () => setEdit(P.emptyPosition()));
+$("ed-start").addEventListener("click", () => setEdit(P.startPosition()));
+for (const r of document.querySelectorAll("input[name=turn]")) r.addEventListener("change", () => setEdit(P.setTurn(edit, r.value)));
+for (const r of document.querySelectorAll("input[name=iplay]")) r.addEventListener("change", () => { iPlay = r.value; renderEdit(); });
+for (const cb of document.querySelectorAll(".castle")) cb.addEventListener("change", () => setEdit(P.setCastling(edit, cb.value, cb.checked)));
+$("ep").addEventListener("change", () => setEdit(P.setEp(edit, $("ep").value)));
+$("ed-copy").addEventListener("click", async () => {
+  try { await navigator.clipboard.writeText($("ed-fen").value); $("ed-copy").textContent = "Copied"; }
+  catch { $("ed-fen").select(); $("ed-copy").textContent = "Select+copy"; }
+  setTimeout(() => ($("ed-copy").textContent = "Copy"), 1500);
+});
+$("ed-play").addEventListener("click", () => {
+  const v = P.validate(edit);
+  if (!v.ok) return renderEdit();
+  const r = game.loadFen(P.toFen(edit)); // only here is the running game replaced
+  if (!r.ok) { $("ed-errors").replaceChildren(Object.assign(document.createElement("li"), { textContent: r.error })); return; }
+  game.orientation = iPlay;
+  leaveEdit();
+  $("fen-error").textContent = "";
+  render(false);
+});
+window.__picchess.editor = { get edit() { return edit; }, get editing() { return editing; } };
+
 await loadPieceSprite();
+buildPalette();
 const initial = new URLSearchParams(location.search).get("fen");
 if (initial) { $("fen").value = initial; loadFromBox(); } else render(false);
