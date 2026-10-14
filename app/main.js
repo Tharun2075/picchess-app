@@ -387,13 +387,14 @@ const scan = initScan({
 });
 window.__picchess.scan = scan;
 const scanUrl = new URLSearchParams(location.search).get("scan");
-if (scanUrl && !/^[a-z]+:|^\/\//i.test(scanUrl)) { // same-origin relative paths only
+const scanTarget = scanUrl && new URL(scanUrl, location.href);
+if (scanTarget && scanTarget.origin === location.origin) { // same-origin only
   const q = new URLSearchParams(location.search);
   for (const [name, v] of [["scan-bottom", q.get("bottom")], ["scan-turn", q.get("turn")]]) {
     const r = v && document.querySelector(`input[name=${name}][value=${v}]`);
     if (r) r.checked = true;
   }
-  scan.loadUrl(scanUrl);
+  scan.loadUrl(scanTarget.href);
 }
 
 await loadPieceSprite();
