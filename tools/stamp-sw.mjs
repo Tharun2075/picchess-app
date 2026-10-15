@@ -6,7 +6,7 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 
 export const APP = path.join(path.dirname(fileURLToPath(import.meta.url)), "..", "app");
-const SKIP = new Set(["sw.js", "_headers", ".DS_Store"]);
+const SKIP = new Set(["sw.js", "_headers", ".DS_Store", ".well-known"]);
 // Big recogniser files (onnxruntime wasm 14 MB, model 1.3 MB): not installed up front, cached the first time a scan needs them.
 export const LAZY_PREFIXES = ["vendor/onnxruntime-web/", "models/"];
 const isLazy = (f) => LAZY_PREFIXES.some((p) => f.startsWith(p));
