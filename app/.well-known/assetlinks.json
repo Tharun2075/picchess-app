@@ -1,11 +1,14 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "ai.thatched.picchess",
       "sha256_cert_fingerprints": [
-        "E3:0D:54:A1:16:00:FB:09:B1:34:80:8B:EB:F7:9C:3C:6C:34:B2:49:DC:A6:35:77:A6:BE:8D:97:F4:1E:39:BA"
+        "E3:0D:54:A1:16:00:FB:09:B1:34:80:8B:EB:F7:9C:3C:6C:34:B2:49:DC:A6:35:77:A6:BE:8D:97:F4:1E:39:BA",
+        "0B:7F:3C:4A:33:23:D9:FF:0C:63:BA:10:BF:54:0C:02:77:FF:B3:F3:53:61:46:7F:9C:9C:E7:97:A2:AE:CD:60"
       ]
     }
   }
