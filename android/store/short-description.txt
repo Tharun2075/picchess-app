@@ -1,0 +1,1 @@
+Turn a photo of a chess board into a position you can edit and analyse.

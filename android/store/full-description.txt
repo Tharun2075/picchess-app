@@ -1,0 +1,19 @@
+PicChess turns a photo or screenshot of a chess board into a position you can play from, edit and analyse.
+
+How it works
+- Take a photo or pick a screenshot of a board (a book diagram, a game on screen, a real board).
+- PicChess reads the pieces on your phone and shows the position.
+- Squares it is not sure about are outlined. Check them and fix any mistakes in the editor before you rely on the position.
+- Analyse with the built-in Stockfish engine: top 3 moves with evaluation and depth.
+- Copy or download the PGN or FEN, or load your own.
+
+Private by design
+- Your photos are read on your phone and never uploaded.
+- Works offline once opened.
+- No account, no ads.
+- Sharing is optional. If you share, only the board picture drawn by PicChess is sent, not your photo, and shared boards are public.
+
+Honest limits
+- Reading is not perfect. Unusual piece sets, strong glare or steep angles cause mistakes, which is why PicChess shows you what it is unsure of.
+
+PicChess is free. Privacy policy: https://picchess.pages.dev/privacy
