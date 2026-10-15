@@ -1,0 +1,52 @@
+{
+  "packageId": "ai.thatched.picchess",
+  "host": "picchess.pages.dev",
+  "name": "PicChess",
+  "launcherName": "PicChess",
+  "display": "standalone",
+  "themeColor": "#262421",
+  "themeColorDark": "#000000",
+  "navigationColor": "#000000",
+  "navigationColorDark": "#000000",
+  "navigationDividerColor": "#000000",
+  "navigationDividerColorDark": "#000000",
+  "backgroundColor": "#262421",
+  "enableNotifications": false,
+  "startUrl": "/index.html",
+  "iconUrl": "https://picchess.pages.dev/icons/icon-512.png",
+  "maskableIconUrl": "https://picchess.pages.dev/icons/icon-maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "/Users/thar/.workflow/state/keys/picchess-upload.jks",
+    "alias": "upload"
+  },
+  "appVersionName": "1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-core",
+  "webManifestUrl": "https://picchess.pages.dev/manifest.webmanifest",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://picchess.pages.dev/",
+  "minSdkVersion": 24,
+  "orientation": "portrait",
+  "fingerprints": [
+    {
+      "name": "upload",
+      "value": "E3:0D:54:A1:16:00:FB:09:B1:34:80:8B:EB:F7:9C:3C:6C:34:B2:49:DC:A6:35:77:A6:BE:8D:97:F4:1E:39:BA"
+    }
+  ],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": [],
+  "protocolHandlers": [],
+  "fileHandlers": [],
+  "launchHandlerClientMode": "",
+  "displayOverride": [],
+  "appVersion": "1"
+}

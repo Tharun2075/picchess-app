@@ -1,0 +1,11 @@
+# Build outputs and signing material never go in git.
+build/
+app/build/
+.gradle/
+local.properties
+*.aab
+*.apk
+*.idsig
+*.jks
+*.keystore
+manifest-checksum.txt
