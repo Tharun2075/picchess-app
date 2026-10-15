@@ -73,11 +73,21 @@ const PRECACHE = [
 // END GENERATED
 const CACHE = `picchess-${VERSION}`;
 const ML_CACHE = `picchess-ml-${ML_VERSION}`;
+// Cloudflare Pages answers /index.html with a 308 to /. A cached response that followed a redirect makes
+// Chrome fail navigations with net::ERR_FAILED (the Android app opens /index.html, share links use ?fen=),
+// so redirected responses are stored and served as plain copies.
+const unredirect = (res) => (res.redirected
+  ? new Response(res.body, { status: res.status, statusText: res.statusText, headers: res.headers })
+  : res);
 const isLazy = (url) => LAZY_PREFIXES.some((p) => url.pathname.startsWith(new URL(p, self.registration.scope).pathname));
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open(CACHE).then((c) => c.addAll(PRECACHE.map((u) => new Request(u, { cache: "reload" })))).then(() => self.skipWaiting()),
+    caches.open(CACHE).then((c) => Promise.all(PRECACHE.map(async (u) => {
+      const res = await fetch(new Request(u, { cache: "reload" }));
+      if (!res.ok) throw new Error(`precache ${u}: ${res.status}`);
+      await c.put(u, unredirect(res));
+    }))).then(() => self.skipWaiting()),
   );
 });
 
@@ -107,10 +117,10 @@ self.addEventListener("fetch", (event) => {
     const cache = await caches.open(CACHE);
     // ignoreSearch: "index.html?fen=..." is served from the cached shell.
     const hit = await cache.match(req, { ignoreSearch: true });
-    if (hit) return hit;
+    if (hit) return unredirect(hit);
     try { return await fetch(req); }
     catch (e) {
-      if (req.mode === "navigate") { const shell = await cache.match("./index.html"); if (shell) return shell; }
+      if (req.mode === "navigate") { const shell = await cache.match("./index.html"); if (shell) return unredirect(shell); }
       throw e;
     }
   })());

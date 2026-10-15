@@ -66,3 +66,10 @@ test("licenses page names Stockfish GPLv3 with a source link and every vendored 
     assert.ok(l.includes(`vendor/${d.name}/LICENSE`), `licenses.html misses ${d.name}`);
   }
 });
+
+test("redirected responses are never served from the cache (308 /index.html -> / gave net::ERR_FAILED)", () => {
+  assert.match(sw, /const unredirect = \(res\) => \(res\.redirected/);
+  assert.doesNotMatch(sw, /c\.addAll\(/);
+  assert.match(sw, /await c\.put\(u, unredirect\(res\)\)/);
+  assert.match(sw, /if \(hit\) return unredirect\(hit\);/);
+});
